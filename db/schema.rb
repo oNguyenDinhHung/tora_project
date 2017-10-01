@@ -10,7 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001045405) do
+ActiveRecord::Schema.define(version: 20171001153135) do
+
+  create_table "apps", force: :cascade do |t|
+    t.string "name"
+    t.integer "maker_id"
+    t.integer "source_id"
+    t.string "category"
+    t.string "type"
+    t.integer "keyword_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["keyword_id"], name: "index_apps_on_keyword_id"
+    t.index ["maker_id"], name: "index_apps_on_maker_id"
+    t.index ["source_id"], name: "index_apps_on_source_id"
+  end
+
+  create_table "keywords", force: :cascade do |t|
+    t.string "keyword"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "kuchikomis", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "app_id"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["app_id"], name: "index_kuchikomis_on_app_id"
+    t.index ["user_id"], name: "index_kuchikomis_on_user_id"
+  end
+
+  create_table "makers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "app_id"
+    t.string "text"
+    t.integer "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["app_id"], name: "index_reviews_on_app_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "sources", force: :cascade do |t|
+    t.integer "originid"
+    t.string "link"
+    t.integer "store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_sources_on_store_id"
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,6 +91,8 @@ ActiveRecord::Schema.define(version: 20171001045405) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "avatar"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
