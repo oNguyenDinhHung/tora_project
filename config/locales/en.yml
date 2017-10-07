@@ -1,5 +1,25 @@
 en:
+  home: "Home"
+  profile: "Profile"
+  sign_out: "Sign out"
+  sign_up: "Sign up"
+  log_in: "Log in"
+  forgotpassword: "Forgot your password?"
+  didntrecvemail: "Didn't receive confirmation instructions?"
+  didntrecvunlock: "Didn't receive unlock instructions?"
+  sendmeresetmail: "Send me reset password instructions"
+  resendconfirmail: "Resend confirmation instructions"
   activerecord:
+    models:
+      user: "User"
+    attributes:
+      user:
+        email: "Email"
+        name: "Username"
+        avatar: "Avatar"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        remember_me: "Remember me on this computer"
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"

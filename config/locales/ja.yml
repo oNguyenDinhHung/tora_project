@@ -1,5 +1,25 @@
 ja:
+  home: "ホーム"
+  profile: "プロフィール"
+  sign_out: "ログアウト"
+  sign_up: "サインアップ"
+  log_in: "ログイン"
+  forgotpassword: "パスワードを忘れた"
+  didntrecvemail: "確認メールを受け取りませんでしたか"
+  didntrecvunlock: "ロック解除を受け取りませんでしたか"
+  sendmeresetmail: "私にリセットパスワードの指示を送ってください"
+  resendconfirmail: "確認の指示を再送信"
   activerecord:
+    models:
+      user: "ユーザー"
+    attributes:
+      user:
+        email: "メール"
+        name: "ユーザ名"
+        avatar: "アバター"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+        remember_me: "このコンピュータで私を覚えている"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
