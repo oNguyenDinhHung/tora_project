@@ -3,7 +3,7 @@ Rails.application.routes.draw do
         registrations: 'users/registrations'
       }
   get 'home/index'
-
+  post 'home/index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: "home#index"
+  root to: "home#index"  
 end
