@@ -10,18 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171001153135) do
+ActiveRecord::Schema.define(version: 20171010151223) do
 
   create_table "apps", force: :cascade do |t|
     t.string "name"
     t.integer "maker_id"
     t.integer "source_id"
     t.string "category"
-    t.string "type"
-    t.integer "keyword_id"
+    t.string "app_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["keyword_id"], name: "index_apps_on_keyword_id"
+    t.string "picture"
     t.index ["maker_id"], name: "index_apps_on_maker_id"
     t.index ["source_id"], name: "index_apps_on_source_id"
   end

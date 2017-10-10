@@ -5,6 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.destroy_all
+User.create(name: "hung nd ",email: "hungnd.k58@gmail.com",password: 123456,password_confirmation: 123456,confirmed_at: Time.now)
+
 Store.destroy_all
 Store.create(name: "MediaMart")
 Store.create(name: "BigC")
@@ -20,3 +23,7 @@ Maker.create(name: "Apple")
 Maker.create(name: "Microsoft")
 Maker.create(name: "Samsung")
 
+Source.destroy_all
+Source.create(store_id: 1,link: "link1")
+Source.create(store_id: 2,link: "link2")
+Source.create(store_id: 3,link: "link3")

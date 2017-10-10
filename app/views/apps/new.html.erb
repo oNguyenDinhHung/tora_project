@@ -1,0 +1,25 @@
+<%=form_for @app do |f| %>
+	<div class="form-group">
+		<%=f.label :name%>
+		<%=f.text_field :name%>
+	</div>
+	<div class="form-group">
+		<%=f.label :maker_id%>
+		<%=f.number_field :maker_id%>
+	</div>
+	<div class="form-group">
+		<%=f.label :source_id%>
+		<%=f.number_field :source_id%>
+	</div>
+	<div class="form-group">
+		<%=f.label :category%>
+		<%=f.text_field :category%>
+	</div>
+	<div class="form-group">
+		<%=f.label :app_type%>
+		<%=f.text_field :app_type%>
+	</div>
+	<div class="form-group">
+		<%=f.submit%>		
+	</div>
+<%end%>
