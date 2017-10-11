@@ -20,12 +20,21 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード確認"
         remember_me: "このコンピュータで私を覚えている"
+      app:
+        name: "アプリ名"
+        maker_id: "メーカー"
+        source_id: "ソース"
+        category: "カテゴリ"
+        app_type: "タイプ"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+  views:
+    app:
+      new_app: "アプリを登録"
   date:
     abbr_day_names:
     - 日
