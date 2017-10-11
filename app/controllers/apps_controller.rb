@@ -11,7 +11,8 @@ class AppsController < ApplicationController
 	def create
 		@app=App.new(app_params)
 		if @app.save
-			redirect_to @app
+			redirect_to apps_path,notice: t(".success")
+			# redirect_to @app,notice: t(".success")
 		else
 			puts @app.errors.full_messages
 			render 'new'

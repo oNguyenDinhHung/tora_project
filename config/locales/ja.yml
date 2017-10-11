@@ -33,6 +33,9 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+  apps:
+    create:
+      success: "アプリを登録しました"
   views:
     app:
       new_app: "アプリを登録"

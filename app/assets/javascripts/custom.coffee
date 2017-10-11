@@ -1,3 +1,3 @@
 $(document).on "turbolinks:load",()->	
-	$("#alert" ).fadeOut 5000
-	$("#notice" ).fadeOut 3000
+	$("#alert" ).fadeOut 15000
+	$("#notice" ).fadeOut 10000
