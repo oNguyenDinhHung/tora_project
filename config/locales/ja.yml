@@ -1,4 +1,5 @@
 ja:
+  websitename: "ベストアプリ"
   home: "ホーム"
   profile: "プロフィール"
   sign_out: "ログアウト"
@@ -15,7 +16,7 @@ ja:
     attributes:
       user:
         email: "メール"
-        name: "ユーザ名"
+        name: "ユーザー名"
         avatar: "アバター"
         password: "パスワード"
         password_confirmation: "パスワード確認"

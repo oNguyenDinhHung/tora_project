@@ -1,12 +1,12 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-light" style="background: linear-gradient(to top left, #99ff99 , green); margin-bottom: 50px;">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+      <span class="navbar-brand" ><%=t 'websitename'%></span>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><%=link_to t('home'),root_path%></li>
       
-      <li><%=link_to "New app",new_app_path%></li>
+      <li><%=link_to t("views.app.new_app"),new_app_path if user_signed_in? %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
