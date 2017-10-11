@@ -35,10 +35,18 @@
       </div>
     <% end %>
     <div class="row form-group">
-        <div class="col-md-4 mx-auto">
-          <%= link_to t("sign_up"),new_user_registration_path%>
-        </div>
+      <div class="col-md-4 mx-auto">
+        <%= link_to t("sign_up"),new_user_registration_path%>        
       </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-4"></div>
+      <div class="col-md-8">        
+        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <%= link_to t("forgotpassword"), new_password_path(resource_name) %>
+        <% end -%>
+      </div>
+    </div>
   </div>
 </div>
 <!--<%= render "devise/shared/links" %>-->
