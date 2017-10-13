@@ -8,5 +8,5 @@ that=$('tbody tr#<%=@maker.id%>')
 <% else %>		
 	that.find(".help-block").empty()
 	that.find("input#maker_name").prop("readonly", true)
-	that.find('input[name="commit"]').hide()
+	that.find('input[name="commit"]').prop("style","display:none")
 <% end %>

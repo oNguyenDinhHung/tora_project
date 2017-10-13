@@ -6,3 +6,9 @@ tr id= maker.id
 		td
 			=f.submit "Update",style: "display:none",class: "btn btn-warning" 
 	td=link_to 'Delete',maker,method: :delete,remote: true,data: {confirm: "Are you sure?"},class: "btn btn-danger"
+javascript:
+	var this_tr=$("tr##{maker.id}");  
+  this_tr.find('input#maker_name').click(function(){
+  	$(this).prop("readonly", false);
+  	$(this).closest('tr').find('input[name="commit"]').prop("style","display:inline-block");
+  });
