@@ -1,0 +1,17 @@
+.row
+	.col-md-6.mx-auto
+		table#makers.table
+			thead.thead-inverse
+				tr
+					th Name
+			tbody
+				=render @makers
+			tfoot.tfoot-default
+				=form_for Maker.new,remote: true do |f|
+					tr
+						td
+							=f.text_field :name,placeholder: "new name",class: 'form-control'
+							.help-block
+						td
+							=f.submit 'Add',class: "btn btn-success"
+		

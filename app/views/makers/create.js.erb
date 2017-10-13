@@ -1,0 +1,10 @@
+<% if @maker.errors.any? %>
+	$(".help-block").empty()
+	<% @maker.errors.full_messages.each do |message| %>
+		$(".help-block").append("<%=message%>")
+	<% end %>	
+<% else %>
+	$("tbody").append("<%=j render @maker %>")	
+	$("tfoot input#maker_name").val('')
+	$(".help-block").empty()
+<% end %>
