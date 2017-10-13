@@ -1,0 +1,12 @@
+that=$('tbody tr#<%=@maker.id%>')
+<% if @maker.errors.any? %>
+	help_block=that.find(".help-block")
+	help_block.empty()
+	<% @maker.errors.full_messages.each do |message| %>
+		help_block.append("<%=message%>")
+	<% end %>	
+<% else %>		
+	that.find(".help-block").empty()
+	that.find("input#maker_name").prop("readonly", true)
+	that.find('input[name="commit"]').hide()
+<% end %>

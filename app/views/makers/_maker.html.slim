@@ -1,0 +1,8 @@
+tr id= maker.id
+	=form_for maker,remote: true do |f|
+		td
+			=f.text_field :name,readonly: true
+			.help-block
+		td
+			=f.submit "Update",style: "display:none",class: "btn btn-warning" 
+	td=link_to 'Delete',maker,method: :delete,remote: true,data: {confirm: "Are you sure?"},class: "btn btn-danger"
