@@ -1,0 +1,11 @@
+help_block=$('tfoot .help-block')
+<% if @store.errors.any? %>
+	help_block.empty()
+	<% @store.errors.full_messages.each do |message| %>
+		help_block.append("<%=message%>")
+	<% end %>	
+<% else %>
+	$("tbody").append("<%=j render @store %>")	
+	$("tfoot input#store_name").val('')
+	help_block.empty()
+<% end %>

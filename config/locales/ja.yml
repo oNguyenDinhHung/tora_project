@@ -17,6 +17,8 @@ ja:
   activerecord:
     models:
       user: "ユーザー"
+      maker: "メーカー"
+      store:  "ストアー"    
     attributes:
       user:
         email: "メール"
@@ -50,6 +52,15 @@ ja:
       update_maker: "更新"
       delete_maker: "削除"
       are_you_sure: "削除しますか"
+      maker_list: "メーカー一覧"
+    store:
+      th_name: "名"
+      new_store: "新ストアー名"
+      add_store: "新規"
+      update_store: "更新"
+      delete_store: "削除"
+      are_you_sure: "削除しますか"
+      store_list: "ストアー一覧"
   date:
     abbr_day_names:
     - 日

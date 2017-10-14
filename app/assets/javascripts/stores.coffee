@@ -1,3 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on "turbolinks:load",()->
+	$('table#stores tbody').click (e)->			
+		target=$(e.target)
+		if target.is('input')
+			this_tr=target.closest('tr')
+			if target.attr('type')=='text'
+				target.prop("readonly", false)
+				this_tr.find('input[type="submit"]').show()
