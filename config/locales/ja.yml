@@ -43,6 +43,13 @@ ja:
   views:
     app:
       new_app: "アプリを登録"
+    maker:
+      th_name: "名"
+      new_maker: "新メーカー名"
+      add_maker: "新規"
+      update_maker: "更新"
+      delete_maker: "削除"
+      are_you_sure: "削除しますか"
   date:
     abbr_day_names:
     - 日

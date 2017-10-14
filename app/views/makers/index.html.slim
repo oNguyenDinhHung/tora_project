@@ -3,15 +3,16 @@
 		table#makers.table
 			thead.thead-inverse
 				tr
-					th Name
+					th =t('views.maker.th_name')
 			tbody
 				=render @makers
 			tfoot.tfoot-default
 				=form_for Maker.new,remote: true do |f|
 					tr
 						td
-							=f.text_field :name,placeholder: "new name",class: 'form-control'
+							=f.text_field :name,placeholder: t("views.maker.new_maker"),class: 'form-control'
 							.help-block
 						td
-							=f.submit 'Add',class: "btn btn-success"
+						td
+							=f.submit t('views.maker.add_maker'),class: "btn btn-success"
 		

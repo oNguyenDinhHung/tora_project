@@ -5,7 +5,7 @@ class MakersController < ApplicationController
 	def create
 		respond_to :js
 		@maker=Maker.new(maker_params)
-		@maker.save		
+		@maker.save
 	end
 	def update
 		respond_to :js
