@@ -1,14 +1,14 @@
 .row
 	.col-md-6.mx-auto
 		h2 =t('views.maker.maker_list')
-		table#makers.table
-			thead.thead-inverse
-				tr
-					th =t('views.maker.th_name')
-			tbody
-				=render @makers
-			tfoot.tfoot-default
-				=form_for Maker.new,remote: true do |f|
+		=form_for Maker.new,remote: true do |f|
+			table#makers.table
+				thead.thead-inverse
+					tr
+						th =t('views.maker.th_name')
+				tbody
+					=render @makers
+				tfoot.tfoot-default				
 					tr
 						td
 							=f.text_field :name,placeholder: t("views.maker.new_maker"),class: 'form-control'

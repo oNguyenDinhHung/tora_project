@@ -7,6 +7,8 @@
       <li class="active"><%=link_to t('home'),root_path%></li>
       
       <li><%=link_to t("views.app.new_app"),new_app_path if user_signed_in? %></li>
+      <li><%=link_to t("views.maker.maker_list"),makers_path if user_signed_in?&&current_user.admin? %></li>
+      <li><%=link_to t("views.store.store_list"),stores_path if user_signed_in?&&current_user.admin? %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>

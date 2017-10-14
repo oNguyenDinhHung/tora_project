@@ -1,14 +1,14 @@
 .row
 	.col-md-6.mx-auto
 		h2 =t('views.store.store_list')
-		table#stores.table
-			thead.thead-inverse
-				tr
-					th =t('views.store.th_name')
-			tbody
-				=render @stores
-			tfoot.tfoot-default
-				=form_for Store.new,remote: true do |f|
+		=form_for Store.new,remote: true do |f|
+			table#stores.table
+				thead.thead-inverse
+					tr
+						th =t('views.store.th_name')
+				tbody
+					=render @stores
+				tfoot.tfoot-default
 					tr
 						td
 							=f.text_field :name,placeholder: t("views.store.new_store"),class: 'form-control'
