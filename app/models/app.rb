@@ -1,7 +1,7 @@
 class App < ApplicationRecord
 	mount_uploader :picture, PictureUploader
   belongs_to :maker
-  belongs_to :source
+  belongs_to :store
   has_many :reviews
   validates :name,presence: true,uniqueness: true
   def rating

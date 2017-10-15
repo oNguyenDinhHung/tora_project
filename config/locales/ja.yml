@@ -33,6 +33,9 @@ ja:
         source_id: "ソース"
         category: "カテゴリ"
         app_type: "タイプ"
+        store_id: "ストアー"
+        originid: "オリジンID"
+        link: "リンク"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
