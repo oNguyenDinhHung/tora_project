@@ -20,15 +20,31 @@
 					<%=f.label :maker_id%>
 				</div>
 				<div class="col-md-8">
-					<%=f.number_field :maker_id,min: 1,class: "form-control"%>
+					<%=f.select :maker_id,Maker.all.map {|x| [x.name,x.id]},{},{class: "form-control"}%>
+				</div>				
+			</div>
+			<div class="row form-group">
+				<div class="col-md-4">
+					<%=f.label :store_id%>
+				</div>				
+				<div class="col-md-8">
+					<%=f.select :store_id,Store.all.map {|x| [x.name,x.id]},{},{class: "form-control"} %>		
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-4">
-					<%=f.label :source_id%>
-				</div>
+					<%=f.label :originid%>
+				</div>				
 				<div class="col-md-8">
-					<%=f.number_field :source_id,min: 1,class: "form-control"%>
+					<%=f.text_field :originid,class: "form-control"%>					
+				</div>
+			</div>
+			<div class="row form-group">
+				<div class="col-md-4">
+					<%=f.label :link%>
+				</div>				
+				<div class="col-md-8">
+					<%=f.text_field :link,class: "form-control"%>					
 				</div>
 			</div>
 			<div class="row form-group">
