@@ -6,7 +6,7 @@ class AppsController < ApplicationController
 		@app=App.new		
 	end
 	def show
-		@app=App.find_by_id params[:id]
+		@app=App.find_by_id params[:id]		
 	end
 	def create
 		@app=App.new(app_params)

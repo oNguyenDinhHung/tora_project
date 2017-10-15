@@ -36,6 +36,11 @@ ja:
         store_id: "ストアー"
         originid: "オリジンID"
         link: "リンク"
+      review:
+        app_id: "アプリ"
+        user_id: "ユーザー"
+        value: "評価"
+        text: "内容"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

@@ -1,0 +1,11 @@
+<% error_attributes=@review.errors.keys%>
+<% [:value,:text].each do |attribute|%>
+	$("#<%=attribute%>_feedback").empty()
+	$("#review_<%=attribute%>").removeClass('is-invalid')
+	<% if error_attributes.include? attribute %>
+		$("#review_<%=attribute%>").addClass('is-invalid')		
+		<% @review.errors.full_messages_for(attribute).each do |msg| %>
+			$("#<%=attribute%>_feedback").append("<li><%=msg%></li>")
+		<% end %>
+	<% end %>				
+<% end %>
