@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
 User.create(name: "nguyen dinh hung",email: "hungnd.k58@gmail.com",password: 123456,password_confirmation: 123456,admin: true,confirmed_at: Time.now)
+User.create(name: "Mail",email: "mail@gmail.com",password: 123456,password_confirmation: 123456,admin: false,confirmed_at: Time.now)
 
 Store.destroy_all
 Store.create(name: "MediaMart")

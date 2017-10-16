@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
 			@review=current_user.reviews.build(review_params)
 			@review.save
 		end	
-		# TestjobJob.set(wait_until: 10.seconds.from_now).perform_later("a","b",5)
+		ReviewJob.perform_later(params[:review][:app_id],@review)
 	end
 	private
 	def review_params
