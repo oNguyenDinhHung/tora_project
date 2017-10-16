@@ -1,1 +1,66 @@
-<%=@app.name%>
+<div class="row">
+	<div class="col-md-3">
+		<%=image_tag @app.picture%>
+	</div>
+	<div class="col-md-7">
+		<%=@app.name%> <br>
+		<%=@app.rating||"****"%>|<%=@app.maker.try(:name)||"メーカー名"%>|<%=@app.app_type||"タイプ"%> <br>
+	</div>
+	<div class="col-md-2">
+		<%=link_to "ダウンロードページヘ",@app.link,target: "_blank",class: "btn btn-secondary"%>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6 mx-auto">
+		<button id="gaiyou_btn" class="btn btn-primary disabled">概要</button>
+		<button id="review_btn" class="btn btn-primary">レビュー</button>
+		<button id="comment_btn" class="btn btn-primary">コメント</button>
+	</div>
+</div>
+
+<div class="row" id="gaiyou">
+	<div class="col-md-8">
+		デモの写真
+	</div>
+	<div class="col-md-4">
+		アプリの情報
+	</div>
+</div>
+
+<div class="row" id="review" style="display: none;">
+	<div class="col-md-8">
+		ユーザレビュー
+		<div id="reviews">
+			<%=render @app.reviews%>
+		</div>
+	</div>
+	<div class="col-md-4">
+		評価してください
+		<%=form_for Review.new,remote: true do |f| %>
+			<%=f.hidden_field :app_id,value: @app.id%>
+			<div class="form-group">
+				<%=f.label :value%>
+				<%=f.number_field :value,type: "number",class: "form-control" %>				
+				<div class="invalid-feedback" id="value_feedback"></div>
+			</div>
+			<div class="form-group">
+				<%=f.label :text%>
+				<%=f.text_area :text,class: "form-control"%>				
+				<div class="invalid-feedback" id="text_feedback"></div>
+			</div>
+			<div class="form-group">
+				<%=f.submit%>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+<div class="row" id="comment" style="display: none;">
+	<div class="col-md-8">
+		ユーザコメント
+	</div>
+	<div class="col-md-4">
+		コメントしてください
+	</div>
+</div>

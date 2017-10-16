@@ -1,3 +1,22 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on "turbolinks:load",()->
+	$("#gaiyou_btn").click ()->
+		$("#gaiyou").show()
+		$("#review").hide()
+		$("#comment").hide()
+		$(this).addClass('disabled')
+		$("#review_btn").removeClass('disabled')
+		$("#comment_btn").removeClass('disabled')
+	$("#comment_btn").click ()->
+		$("#comment").show()
+		$("#review").hide()
+		$("#gaiyou").hide()
+		$(this).addClass('disabled')
+		$("#review_btn").removeClass('disabled')
+		$("#gaiyou_btn").removeClass('disabled')
+	$("#review_btn").click ()->
+		$("#review").show()
+		$("#gaiyou").hide()
+		$("#comment").hide()
+		$(this).addClass('disabled')
+		$("#gaiyou_btn").removeClass('disabled')
+		$("#comment_btn").removeClass('disabled')
