@@ -3,6 +3,7 @@ class App < ApplicationRecord
   belongs_to :maker
   belongs_to :store
   has_many :reviews
+  has_many :reviewed_users,through: :reviews,source: :user,dependent: :destroy
   validates :name,presence: true,uniqueness: true
   def rating
   	reviews.average(:value)
