@@ -8,7 +8,7 @@ App.review = App.cable.subscriptions.create "ReviewChannel",
     console.log("disconnect")
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel    
-    if $("#reviews").find("div#review_"+data.review_id).length
+    if $("#app_"+data.app_id+"_reviews").find("div#review_"+data.review_id).length
      	$("div#review_"+data.review_id).replaceWith(data.review_template)
     else
-    	$("#reviews").append(data.review_template)
+    	$("#app_"+data.app_id+"_reviews").append(data.review_template)

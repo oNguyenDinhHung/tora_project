@@ -1,7 +1,7 @@
 class ReviewChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
-    stream_from "user_#{current_user.id}"
+    stream_from "review_app"
   end
 
   def unsubscribed
