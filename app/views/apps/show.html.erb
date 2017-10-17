@@ -30,6 +30,19 @@
 <div class="row" id="gaiyou">
 	<div class="col-md-8">
 		デモの写真
+		<div id="app_<%=@app.id%>_photos">
+			<%=render @app.photos%>
+		</div>
+		<img id="tmp_photo">
+		<% if current_user==@app.user %>
+			<div class="col-md-3 mx-auto">
+				<%=form_for Photo.new,html: {id: 'new_photo'},remote: true do |f|%>					
+					<label for="photo_image"><%=image_tag "plus.png",width: "100%"%></label>
+			    <%= f.file_field :image,style: "display:none"%> <br>
+					<%= f.submit nil,style: "display:none"%>
+				<% end %>
+			</div>			
+		<% end %>
 	</div>
 	<div class="col-md-4">
 		アプリの情報

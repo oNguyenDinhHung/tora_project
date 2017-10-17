@@ -1,0 +1,23 @@
+<div id="photo_<%=photo.id%>">
+	<%=image_tag photo.image,data: {toggle: "modal",target: "#modal_photo_#{photo.id}"}%>
+
+	<div class="modal fade" id="modal_photo_<%=photo.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel"><%=t('views.photo.modal_title',id: photo.id)%></h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <%=image_tag photo.image%>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%=t('views.photo.modal_close')%></button>
+	        <%=link_to '',photo,method: :delete,data: {confirm: t("are_you_sure")},remote: true,class: "btn btn-danger fa fa-trash"%>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
