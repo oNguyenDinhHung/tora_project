@@ -6,7 +6,7 @@
 		<div class="row">
 			<% @apps.each do |app| %>
 				<div class="col-md-4">
-					<%= image_tag app.picture%> <br>
+					<%= image_tag app.picture,width: "100%"%> <br>
 					<%=link_to app.name,app%> <br>
 					<%= app.rating||"Rating:        *****" %>
 				</div>

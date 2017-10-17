@@ -2,12 +2,12 @@
 	<div class="col-md-3">
 		<% if current_user==@app.user %>		
 			<%= form_for @app,html: {id: 'update_app_picture'},remote: true do |f| %>					  
-			  <label for="app_picture"><%=image_tag @app.picture,size: "250x250"%></label>
+			  <label for="app_picture"><%=image_tag @app.picture,width: "100%"%></label>
 	      <%= f.file_field :picture,style: "display:none"%>
 	      <%= f.submit nil,style: "display:none",form: 'update_app_picture' %>
 			<% end %>
 		<% else %>
-			<%=image_tag @app.picture,size: "250x250"%>
+			<%=image_tag @app.picture,width: "100%"%>
 		<% end %>
 	</div>
 	<div class="col-md-7">
@@ -33,6 +33,14 @@
 	</div>
 	<div class="col-md-4">
 		アプリの情報
+		<% if current_user==@app.user %>		
+			<%= form_for @app,html: {id: 'update_app_description'},remote: true do |f| %>			  
+	      <%= f.text_area :description,:readonly => true,class: "form-control"%>
+	      <%= f.submit nil,style: "display:none",form: 'update_app_description' %>
+			<% end %>
+		<% else %>
+			<%=text_area_tag nil,@app.description,readonly: true%>
+		<% end %>
 	</div>
 </div>
 
@@ -44,22 +52,24 @@
 		</div>
 	</div>
 	<div class="col-md-4">
-		評価してください
-		<%=form_for Review.new,remote: true do |f| %>
-			<%=f.hidden_field :app_id,value: @app.id%>
-			<div class="form-group">
-				<%=f.label :value%>
-				<%=f.number_field :value,type: "number",class: "form-control" %>				
-				<div class="invalid-feedback" id="value_feedback"></div>
-			</div>
-			<div class="form-group">
-				<%=f.label :text%>
-				<%=f.text_area :text,class: "form-control"%>				
-				<div class="invalid-feedback" id="text_feedback"></div>
-			</div>
-			<div class="form-group">
-				<%=f.submit%>
-			</div>
+		<% if user_signed_in? %>
+			評価してください
+			<%=form_for Review.new,remote: true do |f| %>
+				<%=f.hidden_field :app_id,value: @app.id%>
+				<div class="form-group">
+					<%=f.label :value%>
+					<%=f.number_field :value,type: "number",class: "form-control" %>				
+					<div class="invalid-feedback" id="value_feedback"></div>
+				</div>
+				<div class="form-group">
+					<%=f.label :text%>
+					<%=f.text_area :text,class: "form-control"%>				
+					<div class="invalid-feedback" id="text_feedback"></div>
+				</div>
+				<div class="form-group">
+					<%=f.submit%>
+				</div>
+			<% end %>
 		<% end %>
 	</div>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015142837) do
+ActiveRecord::Schema.define(version: 20171017024914) do
 
   create_table "apps", force: :cascade do |t|
     t.string "name"
@@ -24,9 +24,12 @@ ActiveRecord::Schema.define(version: 20171015142837) do
     t.string "originid"
     t.string "link"
     t.integer "store_id"
+    t.text "description"
+    t.integer "user_id"
     t.index ["maker_id"], name: "index_apps_on_maker_id"
     t.index ["source_id"], name: "index_apps_on_source_id"
     t.index ["store_id"], name: "index_apps_on_store_id"
+    t.index ["user_id"], name: "index_apps_on_user_id"
   end
 
   create_table "keywords", force: :cascade do |t|
@@ -49,6 +52,14 @@ ActiveRecord::Schema.define(version: 20171015142837) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.integer "app_id"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["app_id"], name: "index_photos_on_app_id"
   end
 
   create_table "reviews", force: :cascade do |t|

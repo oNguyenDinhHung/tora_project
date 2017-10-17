@@ -23,3 +23,7 @@ $(document).on "turbolinks:load",()->
 	$("#app_picture").change ->		
 		$(this).closest('form').find('label img').attr('src', window.URL.createObjectURL(this.files[0]))
 		$(this).closest('form').find('input[type="submit"]').attr("style",'display:inline-block')
+	$("#app_description").click ->
+		$(this).attr("readonly", false)
+	$("#app_description").change ->		
+		$(this).closest('form').find('input[type="submit"]').attr("style",'display:inline-block')
