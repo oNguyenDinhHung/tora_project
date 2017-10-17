@@ -15,7 +15,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%=t('views.photo.modal_close')%></button>
-	        <%=link_to '',photo,method: :delete,data: {confirm: t("are_you_sure")},remote: true,class: "btn btn-danger fa fa-trash"%>
+	        <%=link_to '',photo,method: :delete,data: {confirm: t("are_you_sure")},remote: true,class: "btn btn-danger fa fa-trash" if user_signed_in?&&current_user==photo.app.user%>
 	      </div>
 	    </div>
 	  </div>

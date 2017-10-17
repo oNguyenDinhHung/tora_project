@@ -43,6 +43,10 @@ ja:
         user_id: "ユーザー"
         value: "評価"
         text: "内容"
+      kuchikomi:
+        app_id: "アプリ"
+        user_id: "ユーザー"        
+        text: "内容"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
