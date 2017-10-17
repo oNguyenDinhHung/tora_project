@@ -1,0 +1,11 @@
+<% error_attributes=@kuchikomi.errors.keys%>
+<% [:text].each do |attribute|%>
+	$("#<%=attribute%>_feedback").empty()
+	$("#kuchikomi_<%=attribute%>").removeClass('is-invalid')
+	<% if error_attributes.include? attribute %>
+		$("#kuchikomi_<%=attribute%>").addClass('is-invalid')		
+		<% @kuchikomi.errors.full_messages_for(attribute).each do |msg| %>
+			$("#<%=attribute%>_feedback").append("<li><%=msg%></li>")
+		<% end %>
+	<% end %>				
+<% end %>

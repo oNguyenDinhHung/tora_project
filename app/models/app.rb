@@ -6,6 +6,7 @@ class App < ApplicationRecord
   has_many :reviews
   has_many :reviewed_users,through: :reviews,source: :user,dependent: :destroy
   has_many :photos
+  has_many :kuchikomis
   validates :name,presence: true,uniqueness: true
   def rating
   	reviews.average(:value)

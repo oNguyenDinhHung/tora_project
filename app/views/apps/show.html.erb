@@ -23,7 +23,7 @@
 	<div class="col-md-6 mx-auto">
 		<button id="gaiyou_btn" class="btn btn-primary disabled">概要</button>
 		<button id="review_btn" class="btn btn-primary">レビュー</button>
-		<button id="comment_btn" class="btn btn-primary">コメント</button>
+		<button id="kuchikomi_btn" class="btn btn-primary">コメント</button>
 	</div>
 </div>
 
@@ -87,11 +87,28 @@
 	</div>
 </div>
 
-<div class="row" id="comment" style="display: none;">
+<div class="row" id="kuchikomi" style="display: none;">
 	<div class="col-md-8">
 		ユーザコメント
+		<div id="app_<%=@app.id%>_kuchikomis">
+			<%=render @app.kuchikomis%>
+		</div>
 	</div>
-	<div class="col-md-4">
-		コメントしてください
+	<div class="col-md-4">		
+		<% if user_signed_in? %>
+			コメントしてください
+			<%=form_for Kuchikomi.new,remote: true do |f| %>
+				<%=f.hidden_field :app_id,value: @app.id%>
+				
+				<div class="form-group">
+					<%=f.label :text%>
+					<%=f.text_area :text,class: "form-control"%>				
+					<div class="invalid-feedback" id="text_feedback"></div>
+				</div>
+				<div class="form-group">
+					<%=f.submit%>
+				</div>
+			<% end %>
+		<% end %>
 	</div>
 </div>

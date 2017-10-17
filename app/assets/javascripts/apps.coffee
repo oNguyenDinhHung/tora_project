@@ -2,12 +2,12 @@ $(document).on "turbolinks:load",()->
 	$("#gaiyou_btn").click ()->
 		$("#gaiyou").show()
 		$("#review").hide()
-		$("#comment").hide()
+		$("#kuchikomi").hide()
 		$(this).addClass('disabled')
 		$("#review_btn").removeClass('disabled')
-		$("#comment_btn").removeClass('disabled')
-	$("#comment_btn").click ()->
-		$("#comment").show()
+		$("#kuchikomi_btn").removeClass('disabled')
+	$("#kuchikomi_btn").click ()->
+		$("#kuchikomi").show()
 		$("#review").hide()
 		$("#gaiyou").hide()
 		$(this).addClass('disabled')
@@ -16,10 +16,10 @@ $(document).on "turbolinks:load",()->
 	$("#review_btn").click ()->
 		$("#review").show()
 		$("#gaiyou").hide()
-		$("#comment").hide()
+		$("#kuchikomi").hide()
 		$(this).addClass('disabled')
 		$("#gaiyou_btn").removeClass('disabled')
-		$("#comment_btn").removeClass('disabled')
+		$("#kuchikomi_btn").removeClass('disabled')
 	$("#app_picture").change ->		
 		$(this).closest('form').find('label img').attr('src', window.URL.createObjectURL(this.files[0]))
 		$(this).closest('form').find('input[type="submit"]').attr("style",'display:inline-block')

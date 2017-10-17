@@ -1,0 +1,13 @@
+<div id="kuchikomi_<%=kuchikomi.id%>" class="row">
+	<div class="col-md-2">
+		<%=image_tag kuchikomi.user.avatar,size: "50x50"%>
+	</div>
+	<div class="col-md-10">
+		<div class="row">
+			<%=kuchikomi.user.name%>|<%=kuchikomi.created_at%>
+		</div>
+		<div class="row">
+			<%=kuchikomi.text%>
+		</div>
+	</div>
+</div>
