@@ -1,0 +1,3 @@
+$("img#tmp_photo").attr("src","")//xoa cai anh tam thoi luc ma chon file di
+$("#new_photo input[type='submit']").attr("style","display:none")//cho bien mat cai nut submit new photo
+$("#app_<%=@app.id%>_photos").append("<%= j render @photo %>")//them anh moi duoc tao vao danh sach anh
