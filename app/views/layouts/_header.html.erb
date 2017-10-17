@@ -1,17 +1,16 @@
-<nav class="navbar navbar-light" style="background: linear-gradient(to top left, #99ff99 , green); margin-bottom: 50px;">
+<nav class="navbar navbar-primary" style="background: linear-gradient(to top left, #99ff99 , green); margin-bottom: 50px;">
   <div class="container-fluid">
     <div class="navbar-header">
-      <span class="navbar-brand" ><%=t 'websitename'%></span>
+      <a class="navbar-brand" ><%=t 'websitename'%></a>
     </div>
+    <%=link_to t('home'),root_path%>
+    <%=link_to t("views.app.new_app"),new_app_path if user_signed_in? %>
+    <%=link_to t("views.maker.maker_list"),makers_path if user_signed_in?&&current_user.admin? %>
+    <%=link_to t("views.store.store_list"),stores_path if user_signed_in?&&current_user.admin? %>
     <ul class="nav navbar-nav">
-      <li class="active"><%=link_to t('home'),root_path%></li>
-      
-      <li><%=link_to t("views.app.new_app"),new_app_path if user_signed_in? %></li>
-      <li><%=link_to t("views.maker.maker_list"),makers_path if user_signed_in?&&current_user.admin? %></li>
-      <li><%=link_to t("views.store.store_list"),stores_path if user_signed_in?&&current_user.admin? %></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
+        <li><%=image_tag current_user.avatar,size: "40x40"%></li>
+        <li><%=current_user.name%></li>
         <li><%=link_to t('profile'),edit_user_registration_path%></li>
         <li><%=link_to t("sign_out"),destroy_user_session_path,method: :delete,class: "glyphicon glyphicon-log-out"%></li>
       <% else %>
