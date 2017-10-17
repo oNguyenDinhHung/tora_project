@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-3">
-		<% if current_user==@app.user %>		
+		<% if user_signed_in?&&current_user==@app.user %>		
 			<%= form_for @app,html: {id: 'update_app_picture'},remote: true do |f| %>					  
 			  <label for="app_picture"><%=image_tag @app.picture,width: "100%"%></label>
 	      <%= f.file_field :picture,style: "display:none"%>
@@ -34,7 +34,7 @@
 			<%=render @app.photos%>
 		</div>
 		<img id="tmp_photo">
-		<% if current_user==@app.user %>
+		<% if user_signed_in?&&current_user==@app.user %>
 			<div class="col-md-3 mx-auto">
 				<%=form_for Photo.new,html: {id: 'new_photo'},remote: true do |f|%>					
 					<label for="photo_image"><%=image_tag "plus.png",width: "100%"%></label>
@@ -45,14 +45,14 @@
 		<% end %>
 	</div>
 	<div class="col-md-4">
-		アプリの情報
-		<% if current_user==@app.user %>		
+		アプリの情報<br>
+		<% if user_signed_in?&&current_user==@app.user %>		
 			<%= form_for @app,html: {id: 'update_app_description'},remote: true do |f| %>			  
 	      <%= f.text_area :description,:readonly => true,class: "form-control"%>
 	      <%= f.submit nil,style: "display:none",form: 'update_app_description' %>
 			<% end %>
 		<% else %>
-			<%=text_area_tag nil,@app.description,readonly: true%>
+			<%=text_area_tag nil,@app.description,class: "form-control",readonly: true%>
 		<% end %>
 	</div>
 </div>
