@@ -1,6 +1,14 @@
 <div class="row">
 	<div class="col-md-3">
-		<%=image_tag @app.picture%>
+		<% if current_user==@app.user %>		
+			<%= form_for @app,html: {id: 'update_app_picture'},remote: true do |f| %>					  
+			  <label for="app_picture"><%=image_tag @app.picture,size: "250x250"%></label>
+	      <%= f.file_field :picture,style: "display:none"%>
+	      <%= f.submit nil,style: "display:none",form: 'update_app_picture' %>
+			<% end %>
+		<% else %>
+			<%=image_tag @app.picture,size: "250x250"%>
+		<% end %>
 	</div>
 	<div class="col-md-7">
 		<%=@app.name%> <br>

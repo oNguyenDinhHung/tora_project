@@ -20,3 +20,6 @@ $(document).on "turbolinks:load",()->
 		$(this).addClass('disabled')
 		$("#gaiyou_btn").removeClass('disabled')
 		$("#comment_btn").removeClass('disabled')
+	$("#app_picture").change ->		
+		$(this).closest('form').find('label img').attr('src', window.URL.createObjectURL(this.files[0]))
+		$(this).closest('form').find('input[type="submit"]').attr("style",'display:inline-block')
