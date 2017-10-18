@@ -1,22 +1,40 @@
-<nav class="navbar navbar-primary" style="background: linear-gradient(to top left, #99ff99 , green); margin-bottom: 50px;">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" ><%=t 'websitename'%></a>
-    </div>
-    <%=link_to t('home'),root_path%>
-    <%=link_to t("views.app.new_app"),new_app_path if user_signed_in? %>
-    <%=link_to t("views.maker.maker_list"),makers_path if user_signed_in?&&current_user.admin? %>
-    <%=link_to t("views.store.store_list"),stores_path if user_signed_in?&&current_user.admin? %>
-    <ul class="nav navbar-nav">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 50px;">
+  <a class="navbar-brand" href="#"><%=t 'websitename'%></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <%=link_to t('home'),root_path,class: "nav-link"%>
+      </li>
+      <li class="nav-item">
+        <%=link_to t("views.app.new_app"),new_app_path,class: "nav-link" if user_signed_in? %>
+      </li>
+      <li class="nav-item">
+        <%=link_to t("views.maker.maker_list"),makers_path,class: "nav-link" if user_signed_in?&&current_user.admin? %>
+      </li>
+      <li>
+        <%=link_to t("views.store.store_list"),stores_path,class: "nav-link" if user_signed_in?&&current_user.admin? %>
+      </li>
+      
+    </ul>
+    <ul class="navbar-nav nav-right">
       <% if user_signed_in? %>
         <li><%=image_tag current_user.avatar,size: "40x40"%></li>
-        <li><%=current_user.name%></li>
-        <li><%=link_to t('profile'),edit_user_registration_path%></li>
-        <li><%=link_to t("sign_out"),destroy_user_session_path,method: :delete,class: "glyphicon glyphicon-log-out"%></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%=current_user.name%>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <%=link_to t('profile'),edit_user_registration_path,class: "fa fa-user dropdown-item"%>
+            <%=link_to t("sign_out"),destroy_user_session_path,method: :delete,class: "fa fa-sign-out dropdown-item"%>
+          </div>
+        </li>
       <% else %>
-        <li><%=link_to t("sign_up"),new_user_registration_path,class: "glyphicon glyphicon-user"%></li>
-        <li><%=link_to t("log_in"),new_user_session_path,class: "glyphicon glyphicon-log-in"%></li>
-      <% end %>      
-    </ul>
+        <li><%=link_to t("sign_up"),new_user_registration_path,class: "nav-link fa fa-user-plus"%></li>
+        <li><%=link_to t("log_in"),new_user_session_path,class: "nav-link fa fa-sign-in"%></li>
+      <% end %>
+    </ul>    
   </div>
 </nav>
