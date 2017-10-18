@@ -1,16 +1,43 @@
+<div class="container">
+
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
 <h2><%=t "resendconfirmail"%></h2>
+<hr>
+</div>
+</div>
 
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<%= devise_error_messages! %>
+</div>
+</div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-  </div>
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<div class="form-group">
+<label class="sr-only" for="email">E-Mail Address</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+<%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control", placeholder: "メール" %>
+</div>
+</div>
+</div>
+</div>
 
-  <div class="actions">
-    <%= f.submit t("resendconfirmail") %>
-  </div>
+<div class="row" style="padding-top: 1rem">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<%= f.submit t("resendconfirmail"), :class => 'btn btn-success' %>
 <% end %>
 
+<br><br>
 <%= render "devise/shared/links" %>
+</div>
+</div>
+
+</div>

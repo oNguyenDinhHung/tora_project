@@ -1,57 +1,88 @@
-<div class="row">
-	<div class="col-md-4 mx-auto">
-		<h1><%=t 'views.app.new_app'%></h1>
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<h2><%=t 'views.app.new_app'%></h2>
+			<hr>
+		</div>
 	</div>
-</div>
-<br>
-<div class="row">	
-	<div class="col-md-4 mx-auto">
-		<%=form_for @app do |f| %>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :name%>
-				</div>
-				<div class="col-md-8">
-					<%=f.text_field :name,class: "form-control"%>
-				</div>				
-			</div>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :maker_id%>
-				</div>
-				<div class="col-md-8">
-					<%=f.number_field :maker_id,min: 1,class: "form-control"%>
+
+	<%=form_for @app do |f| %>
+
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="email">E-Mail Address</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-window-restore"></i></div>
+					<%=f.text_field :name, autofocus: true, class: "form-control", placeholder: "アプリ名" %>
 				</div>
 			</div>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :source_id%>
-				</div>
-				<div class="col-md-8">
-					<%=f.number_field :source_id,min: 1,class: "form-control"%>
-				</div>
-			</div>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :category%>
-				</div>
-				<div class="col-md-8">
-					<%=f.text_field :category,class: "form-control"%>
-				</div>
-			</div>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :app_type%>
-				</div>
-				<div class="col-md-8">
-					<%=f.text_field :app_type,class: "form-control"%>
-				</div>
-			</div>
-			<div class="row form-group">
-				<div class="col-md-4 mx-auto">
-					<%=f.submit %>
-				</div>						
-			</div>
-		<%end%>
+		</div>
 	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="email">Name</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-address-card-o"></i></div>
+					<%=f.number_field :maker_id,min: 1, class: "form-control", placeholder: "メーカー" %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="password">Password</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-external-link"></i></div>
+					<%=f.number_field :source_id,min: 1, class: "form-control", placeholder: "ソース" %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="password">Password Confirmation</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-tasks"></i></div>
+					<%=f.text_field :category, class: "form-control", placeholder: "カテゴリ" %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="password">Password Confirmation</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-list-ul"></i></div>
+					<%=f.text_field :app_type, class: "form-control", placeholder: "タイプ" %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" style="padding-top: 1rem">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<%=f.submit :class => 'btn btn-success' %>
+		</div>
+	</div>
+
+	<% end %>
+
 </div>

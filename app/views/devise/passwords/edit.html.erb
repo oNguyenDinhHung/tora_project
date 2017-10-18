@@ -1,36 +1,67 @@
-<div class="row">
-  <div class="col-md-4 mx-auto">
-    <h2><%=t "changepassword"%></h2>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <h2><%=t "changepassword"%></h2>
+      <hr>
+    </div>
   </div>
-</div>
-<br>
-<div class="row">
-  <div class="col-md-4 mx-auto">
-    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
-    <%= f.hidden_field :reset_password_token %>
-    <div class="row form-group">
-      <div class="col-md-5">
-        <%= f.label :password, t("new_password") %>
-      </div>
-      <div class="col-md-7">
-        <%= f.password_field :password, autofocus: true, autocomplete: "off",class: "form-control" %>
-      </div>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <%= devise_error_messages! %>
     </div>
-    <div class="row form-group">
-      <div class="col-md-5">
-        <%= f.label :password_confirmation, t("confirm_new_password") %>
-      </div>
-      <div class="col-md-7">
-        <%= f.password_field :password_confirmation, autocomplete: "off",class: "form-control" %>
-      </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-md-6 mx-auto">
-          <%= f.submit t("change_my_password") %>
+  </div>
+  <%= f.hidden_field :reset_password_token %>
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="sr-only" for="password">Password</label>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+          <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "パスワード" %>
         </div>
+      </div>
     </div>
-    <% end %>
+    <div class="col-md-3">
+      <div class="form-control-feedback">
+        <span class="text-success align-middle">
+          <i class="fa fa-exclamation-circle"></i>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+          <% end %>
+        </span>
+      </div>
+    </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="sr-only" for="password">Password Confirmation</label>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-check"></i></div>
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "パスワード確認" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 1rem">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+    <%= f.submit t("change_my_password"), :class => 'btn btn-success' %>
+      <br><br>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+
+  <% end %>
+
 </div>
-<!--<%= render "devise/shared/links" %>-->

@@ -12,3 +12,15 @@
  * 
  */
 @import "bootstrap";
+
+.fa-cog:hover {
+    color: blue;
+}
+
+.hidden {
+     display:none;
+}
+
+.input-group .form-control {
+	width: auto;
+}
