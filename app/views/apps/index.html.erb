@@ -1,3 +1,65 @@
+<!-- <div class="row">
+	<div class="col-6 col-md-2 sidebar-offcanvas ml-5" id="sidebar">
+		<div class="list-group">
+			<form class="">
+			<input class="form-control" type="text" placeholder="サーチ。。。" aria-label="Search">
+			</form>
+			<a href="#" class="list-group-item active">拡張機能</a>
+			<a href="#" class="list-group-item">テーマ</a>
+			<a href="#" class="list-group-item">アプリ</a>
+			<a href="#" class="list-group-item">ゲーム</a>
+		</div>
+    </div>
+	<div class="col-md-8">
+		<div class="row">
+			<% @apps.each do |app| %>
+			
+				<div class="col">
+					<%= image_tag app.picture%><br>
+					<%=link_to app.name,app%><br>
+					<%= app.rating||"Rating: " %>
+					
+					<%
+					if app.rating
+					@tmp = app.rating.to_f - app.rating.to_f.round
+						if @tmp>=0
+							if @tmp<0.25
+								@star=app.rating.to_f.round
+								@halfstar=0
+							else
+							@star=app.rating.to_f.round
+							@halfstar=1
+							end
+						else
+							if @tmp.abs<0.25
+								@star=app.rating.to_f.round
+								@halfstar=0
+							else
+							@star=app.rating.to_f.round-1
+							@halfstar=1
+							end
+						end
+					end
+
+					%>
+					<%
+					while @star>0 do
+						@star = @star-1 %>
+						<i class="fa fa-star" aria-hidden="true"></i>
+					<% end %>
+					<% if @halfstar!=0 %>
+					<i class="fa fa-star-half-o" aria-hidden="true"></i>
+					<%end%>
+
+				</div>
+			
+			<% end %>
+		</div>		
+	</div>
+</div> -->
+
+
+
 <div class="row">
 	<div class="col-md-3">
 		

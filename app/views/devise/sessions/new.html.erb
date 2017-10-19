@@ -1,52 +1,63 @@
+<div class="container">
+
 <div class="row">
-  <div class="col-md-4 mx-auto">
-    <h2><%=t "log_in"%></h2>
-  </div>
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<h2><%=t "log_in"%></h2>
+<hr>
 </div>
-<br>
+</div>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name) ) do |f| %>
+
 <div class="row">
-  <div class="col-md-4 mx-auto">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="row form-group">
-        <div class="col-md-4">
-          <%= f.label :email %>
-        </div>
-        <div class="col-md-8">
-          <%= f.email_field :email, autofocus: true,class: "form-control" %>
-        </div>
-      </div>
-      <div class="row form-group">
-        <div class="col-md-4">
-          <%= f.label :password %>
-        </div>
-        <div class="col-md-8">
-        <%= f.password_field :password, autocomplete: "off",class: "form-control" %></div>
-      </div>
-      <!--<% if devise_mapping.rememberable? -%>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </div>
-      <% end -%>-->
-      <div class="row form-group">
-        <div class="col-md-4 mx-auto">
-          <%= f.submit t("log_in") %>
-        </div>
-      </div>
-    <% end %>
-    <div class="row form-group">
-      <div class="col-md-4 mx-auto">
-        <%= link_to t("sign_up"),new_user_registration_path%>        
-      </div>
-    </div>
-    <div class="row form-group">
-      <div class="col-md-4"></div>
-      <div class="col-md-8">        
-        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-            <%= link_to t("forgotpassword"), new_password_path(resource_name) %>
-        <% end -%>
-      </div>
-    </div>
-  </div>
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<div class="form-group">
+<label class="sr-only" for="email">E-Mail Address</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+<%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "メール" %>
 </div>
-<!--<%= render "devise/shared/links" %>-->
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<div class="form-group">
+<label class="sr-only" for="password">Password</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+<%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "パスワード" %>
+</div>
+</div>
+</div>
+</div>
+
+<% if devise_mapping.rememberable? -%>
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6" style="padding-top: .35rem">
+<div class="form-check mb-2 mr-sm-2 mb-sm-0">
+<label class="form-check-label">
+<span style="padding-bottom: .15rem"><input class="form-check-input" name="remember"
+type="checkbox" > ログイン情報を保存する</span>
+</label>
+</div>
+</div>
+</div>
+<% end -%>
+
+<div class="row" style="padding-top: 1rem">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+  <%= f.submit t("log_in"), :class => 'btn btn-success' %><% end %>
+
+<br><br>
+<%= render "devise/shared/links" %>
+</div>
+</div>
+
+</div>

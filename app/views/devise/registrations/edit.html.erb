@@ -1,48 +1,70 @@
+<div class="container">
+
 <div class="row">
-  <div class="col-md-4 mx-auto">
-    <h2><%= t('profile') %></h2>
-  </div>
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<h2><%= t('profile') %></h2>
+<hr>
 </div>
-<br>
+</div>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 <div class="row">
-  <div class="col-md-4 mx-auto">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
-    <div class="row form-group">
-      <div class="col-md-4">
-        <%= f.label :name %>
-      </div>
-      <div class="col-md-8">
-        <%= f.text_field :name, autofocus: true,class: "form-control"  %>
-      </div>
-    </div>
-    <div class="row form-group">
-      <div class="col-md-4">
-        <%= f.label :email %>        
-      </div>
-      <div class="col-md-8">
-        <%= f.email_field :email,class: "form-control" %>
-      </div>
-    </div>
-    <div class="row form-group">
-      <div class="col-md-4">
-        <%= f.label :avatar%>      
-      </div>
-      <div class="col-md-8">
-        <% if resource.avatar&&resource.avatar.present? %>
-          <%= image_tag resource.avatar%><br>
-        <% else %>
-          <%= image_tag "fallback/default.jpg"%><br>
-        <% end %>
-        <%= f.file_field :avatar %>
-        <%= f.hidden_field :avatar_cache %>
-      </div>
-    </div>
-    <div class="row form-group">
-      <div class="col-md-4 mx-auto">
-        <%= f.submit%>
-      </div>
-    </div>
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<%= devise_error_messages! %>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<div class="form-group">
+<label class="sr-only" for="email">Name</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+<%= f.text_field :name, class: "form-control", placeholder: "ユーザー名" %>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<div class="form-group">
+<label class="sr-only" for="email">E-Mail Address</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+<%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "メール" %>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<div class="field">
+    <%= f.label :avatar %><br />
+    <% if resource.avatar&&resource.avatar.present? %>
+      <%= image_tag resource.avatar,size: "50x50" %><br>
+    <% else %>
+      <%= image_tag "fallback/default.jpg",size: "50x50" %><br>
     <% end %>
-  </div>
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+</div>
+</div>
+</div>
+
+<div class="row" style="padding-top: 1rem">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+<%= f.submit :class => 'btn btn-success' %>
+</div>
+</div>
+
+<% end %>
+
 </div>

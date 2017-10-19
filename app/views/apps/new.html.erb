@@ -1,4 +1,137 @@
-<div class="row">
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<h1><%=t 'views.app.new_app'%></h1>
+			<hr>
+		</div>
+	</div>
+
+	<%=form_for @app do |f| %>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="email">Application name</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-window-restore"></i></div>
+					<%=f.text_field :name, class: "form-control", placeholder: "アプリ名" %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="email">Maker</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-users"></i></div>
+					<%=f.select :maker_id,Maker.all.map {|x| [x.name,x.id]},{},class: "form-control", placeholder: "メーカー" %>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="form-control-feedback">
+				<span class="text-success align-middle">
+					<i class="fa fa-exclamation-circle"></i>
+					<em>メーカー</em><br />
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="password">Store</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-building-o"></i></div>
+					<%=f.select :store_id,Store.all.map {|x| [x.name,x.id]},{},class: "form-control", placeholder: "ストアー" %>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="form-control-feedback">
+				<span class="text-success align-middle">
+					<i class="fa fa-exclamation-circle"></i>
+					<em>ストアー</em><br />
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="password">OriginID</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-id-badge"></i></div>
+					<%=f.text_field :originid,class: "form-control", placeholder: "オリジンID" %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="password">Link</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-external-link"></i></div>
+					<%=f.text_field :link,class: "form-control", placeholder: "リンク" %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="password">OriginID</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-list"></i></div>
+					<%=f.text_field :category,class: "form-control", placeholder: "カテゴリ" %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label class="sr-only" for="password">OriginID</label>
+				<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+					<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-sitemap"></i></div>
+					<%=f.text_field :app_type,class: "form-control", placeholder: "タイプ" %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" style="padding-top: 1rem">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<%= f.submit :class => 'btn btn-success' %>
+		</div>
+	</div>
+
+	<% end %>
+
+</div>
+
+
+
+
+<!-- <div class="row">
 	<div class="col-md-4 mx-auto">
 		<h1><%=t 'views.app.new_app'%></h1>
 	</div>
@@ -70,4 +203,4 @@
 			</div>
 		<%end%>
 	</div>
-</div>
+</div> -->
