@@ -8,8 +8,11 @@ class App < ApplicationRecord
   has_many :reviews
   has_many :reviewed_users,through: :reviews,source: :user,dependent: :destroy
   has_many :photos
-  has_many :kuchikomis
-  validates :name,presence: true,uniqueness: true
+  has_many :kuchikomis  
+  validates :name,uniqueness: true
+  validates :originid,uniqueness: {scope: :store}
+  validates :link,presence: true
+
   def rating
   	reviews.average(:value)
   end

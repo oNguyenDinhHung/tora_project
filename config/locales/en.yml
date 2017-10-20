@@ -29,8 +29,8 @@ en:
         name: "Name"
         maker_id: "Maker"
         source_id: "Source"
-        category: "Category"
-        app_type: "Type"
+        category_id: "Category"
+        apptype_id: "Type"
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"
