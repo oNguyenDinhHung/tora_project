@@ -1,0 +1,19 @@
+.row
+	.col-md-6.mx-auto
+		h2 =t('views.apptype.apptype_list')
+		=form_for Apptype.new,remote: true do |f|
+			table#apptypes.table
+				thead.thead-inverse
+					tr
+						th =t('views.apptype.th_name')
+				tbody
+					=render @apptypes
+				tfoot.tfoot-default				
+					tr
+						td
+							=f.text_field :name,placeholder: t("views.apptype.new_apptype"),class: 'form-control'
+							.help-block
+						td
+						td
+							=f.submit t('views.apptype.add_apptype'),class: "btn btn-success"
+		

@@ -37,3 +37,18 @@ Maker.create(name: "Outfit7")
 Maker.create(name: "Halfbrick Studios")
 Maker.create(name: "Blizzard Entertainment Inc")
 Maker.create(name: "Square Enix")
+
+Category.destroy_all
+Category.create(name: "Sports")
+Category.create(name: "Shoping")
+Category.create(name: "Pictures")
+Category.create(name: "Movies")
+Category.create(name: "Search tool")
+Category.create(name: "Manga")
+Category.create(name: "Game")
+
+Apptype.destroy_all
+Apptype.create(name: "Mobile")
+Apptype.create(name: "PC")
+Apptype.create(name: "Ipad")
+Apptype.create(name: "XBox")

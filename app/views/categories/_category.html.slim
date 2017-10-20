@@ -1,0 +1,7 @@
+tr id=category.id
+	td
+		=text_field_tag 'category[name]',category.name,style: "border: 0px",readonly: true
+		.help-block
+	td
+		=submit_tag t("views.category.update_category"),form: "not_new_category",style: "display:none",class: "btn btn-warning" 
+	td=link_to t('views.category.delete_category'),category,method: :delete,remote: true,data: {confirm: t("views.category.are_you_sure")},class: "btn btn-danger"

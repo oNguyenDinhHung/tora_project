@@ -1,0 +1,19 @@
+.row
+	.col-md-6.mx-auto
+		h2 =t('views.category.category_list')
+		=form_for Category.new,remote: true do |f|
+			table#categories.table
+				thead.thead-inverse
+					tr
+						th =t('views.category.th_name')
+				tbody
+					=render @categories
+				tfoot.tfoot-default				
+					tr
+						td
+							=f.text_field :name,placeholder: t("views.category.new_category"),class: 'form-control'
+							.help-block
+						td
+						td
+							=f.submit t('views.category.add_category'),class: "btn btn-success"
+		

@@ -1,0 +1,11 @@
+help_block=$('tfoot .help-block')
+<% if @category.errors.any? %>
+	help_block.empty()
+	<% @category.errors.full_messages.each do |message| %>
+		help_block.append("<%=message%>")
+	<% end %>	
+<% else %>
+	$("tbody").append("<%=j render @category %>")	
+	$("tfoot input#category_name").val('')
+	help_block.empty()
+<% end %>

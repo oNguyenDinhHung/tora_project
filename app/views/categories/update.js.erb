@@ -1,0 +1,12 @@
+that=$('tbody tr#<%=@category.id%>')
+<% if @category.errors.any? %>
+	help_block=that.find(".help-block")
+	help_block.empty()
+	<% @category.errors.full_messages.each do |message| %>
+		help_block.append("<%=message%>")
+	<% end %>	
+<% else %>		
+	that.find(".help-block").empty()
+	that.find("input#category_name").prop("readonly", true)
+	that.find('input[name="commit"]').prop("style","display:none")
+<% end %>
