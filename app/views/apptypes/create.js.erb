@@ -1,0 +1,11 @@
+help_block=$('tfoot .help-block')
+<% if @apptype.errors.any? %>
+	help_block.empty()
+	<% @apptype.errors.full_messages.each do |message| %>
+		help_block.append("<%=message%>")
+	<% end %>	
+<% else %>
+	$("tbody").append("<%=j render @apptype %>")	
+	$("tfoot input#apptype_name").val('')
+	help_block.empty()
+<% end %>

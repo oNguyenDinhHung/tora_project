@@ -10,14 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017024914) do
+ActiveRecord::Schema.define(version: 20171020051324) do
 
   create_table "apps", force: :cascade do |t|
     t.string "name"
     t.integer "maker_id"
     t.integer "source_id"
-    t.string "category"
-    t.string "app_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"
@@ -26,10 +24,26 @@ ActiveRecord::Schema.define(version: 20171017024914) do
     t.integer "store_id"
     t.text "description"
     t.integer "user_id"
+    t.integer "category_id"
+    t.integer "apptype_id"
+    t.index ["apptype_id"], name: "index_apps_on_apptype_id"
+    t.index ["category_id"], name: "index_apps_on_category_id"
     t.index ["maker_id"], name: "index_apps_on_maker_id"
     t.index ["source_id"], name: "index_apps_on_source_id"
     t.index ["store_id"], name: "index_apps_on_store_id"
     t.index ["user_id"], name: "index_apps_on_user_id"
+  end
+
+  create_table "apptypes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "keywords", force: :cascade do |t|

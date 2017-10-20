@@ -1,0 +1,7 @@
+tr id=apptype.id
+	td
+		=text_field_tag 'apptype[name]',apptype.name,style: "border: 0px",readonly: true
+		.help-block
+	td
+		=submit_tag t("views.apptype.update_apptype"),form: "not_new_apptype",style: "display:none",class: "btn btn-warning" 
+	td=link_to t('views.apptype.delete_apptype'),apptype,method: :delete,remote: true,data: {confirm: t("views.apptype.are_you_sure")},class: "btn btn-danger"

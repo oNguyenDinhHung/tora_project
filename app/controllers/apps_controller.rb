@@ -28,6 +28,6 @@ class AppsController < ApplicationController
 	end
 	private
 	def app_params
-		params.require(:app).permit(:name,:picture,:maker_id,:store_id,:originid,:link,:category,:app_type,:description,:user_id)
+		params.require(:app).permit(:name,:picture,:maker_id,:store_id,:originid,:link,:category_id,:apptype_id,:description,:user_id)
 	end
 end

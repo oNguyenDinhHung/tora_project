@@ -17,7 +17,12 @@
       <li>
         <%=link_to t("views.store.store_list"),stores_path,class: "nav-link" if user_signed_in?&&current_user.admin? %>
       </li>
-      
+      <li>
+        <%=link_to t("views.category.category_list"),categories_path,class: "nav-link" if user_signed_in?&&current_user.admin? %>
+      </li>
+      <li>
+        <%=link_to t("views.apptype.apptype_list"),apptypes_path,class: "nav-link" if user_signed_in?&&current_user.admin? %>
+      </li>
     </ul>
     <ul class="navbar-nav nav-right">
       <% if user_signed_in? %>

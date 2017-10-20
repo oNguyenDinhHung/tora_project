@@ -1,0 +1,12 @@
+that=$('tbody tr#<%=@apptype.id%>')
+<% if @apptype.errors.any? %>
+	help_block=that.find(".help-block")
+	help_block.empty()
+	<% @apptype.errors.full_messages.each do |message| %>
+		help_block.append("<%=message%>")
+	<% end %>	
+<% else %>		
+	that.find(".help-block").empty()
+	that.find("input#apptype_name").prop("readonly", true)
+	that.find('input[name="commit"]').prop("style","display:none")
+<% end %>

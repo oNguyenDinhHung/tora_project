@@ -20,7 +20,9 @@ ja:
       user: "ユーザー"
       maker: "メーカー"
       store:  "ストアー"
-      photo: "イメージ"   
+      photo: "イメージ"
+      category: "カテゴリー"
+      apptype: "タイプ"   
     attributes:
       user:
         email: "メール"
@@ -78,6 +80,22 @@ ja:
       delete_store: "削除"
       are_you_sure: "削除しますか"
       store_list: "ストアー一覧"
+    category:
+      th_name: "名"
+      new_category: "新カテゴリー名"
+      add_category: "新規"
+      update_category: "更新"
+      delete_category: "削除"
+      are_you_sure: "削除しますか"
+      category_list: "カテゴリー一覧"
+    apptype:
+      th_name: "名"
+      new_apptype: "新タイプ名"
+      add_apptype: "新規"
+      update_apptype: "更新"
+      delete_apptype: "削除"
+      are_you_sure: "削除しますか"
+      apptype_list: "タイプ一覧"
   date:
     abbr_day_names:
     - 日
