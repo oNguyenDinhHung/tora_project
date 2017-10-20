@@ -6,13 +6,14 @@
 <br>
 <div class="row">	
 	<div class="col-md-4 mx-auto">
-		<%=form_for @app do |f| %>
+		<%=form_for @app,remote: true do |f| %>
 			<div class="row form-group">
 				<div class="col-md-4">
 					<%=f.label :name%>
 				</div>
 				<div class="col-md-8">
 					<%=f.text_field :name,class: "form-control"%>
+					<div class="invalid-feedback" id="name_feedback"></div>
 				</div>				
 			</div>
 			<div class="row form-group">
@@ -21,6 +22,7 @@
 				</div>
 				<div class="col-md-8">
 					<%=f.select :maker_id,Maker.all.map {|x| [x.name,x.id]},{},{class: "form-control"}%>
+					<div class="invalid-feedback" id="maker_feedback"></div>
 				</div>				
 			</div>
 			<div class="row form-group">
@@ -28,7 +30,8 @@
 					<%=f.label :store_id%>
 				</div>				
 				<div class="col-md-8">
-					<%=f.select :store_id,Store.all.map {|x| [x.name,x.id]},{},{class: "form-control"} %>		
+					<%=f.select :store_id,Store.all.map {|x| [x.name,x.id]},{},{class: "form-control"} %>
+					<div class="invalid-feedback" id="store_feedback"></div>
 				</div>
 			</div>
 			<div class="row form-group">
@@ -36,7 +39,8 @@
 					<%=f.label :originid%>
 				</div>				
 				<div class="col-md-8">
-					<%=f.text_field :originid,class: "form-control"%>					
+					<%=f.text_field :originid,class: "form-control"%>
+					<div class="invalid-feedback" id="originid_feedback"></div>					
 				</div>
 			</div>
 			<div class="row form-group">
@@ -44,7 +48,8 @@
 					<%=f.label :link%>
 				</div>				
 				<div class="col-md-8">
-					<%=f.text_field :link,class: "form-control"%>					
+					<%=f.text_field :link,class: "form-control"%>
+					<div class="invalid-feedback" id="link_feedback"></div>				
 				</div>
 			</div>
 			<div class="row form-group">
@@ -53,6 +58,7 @@
 				</div>
 				<div class="col-md-8">
 					<%=f.select :category_id,Category.all.map {|x| [x.name,x.id]},{},{class: "form-control"} %>
+					<div class="invalid-feedback" id="category_feedback"></div>
 				</div>
 			</div>
 			<div class="row form-group">
@@ -61,6 +67,7 @@
 				</div>
 				<div class="col-md-8">
 					<%=f.select :apptype_id,Apptype.all.map {|x| [x.name,x.id]},{},{class: "form-control"} %>
+					<div class="invalid-feedback" id="apptype_feedback"></div>
 				</div>
 			</div>
 			<div class="row form-group">

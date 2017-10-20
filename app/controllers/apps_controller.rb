@@ -7,16 +7,20 @@ class AppsController < ApplicationController
 		@app=App.new		
 	end
 	def show
-		@app=App.find_by_id params[:id]		
+		@app=App.find_by_id params[:id]
+		unless @app			
+			redirect_to root_path,alert: t(".notfound")
+		end				
 	end
 	def create
+		respond_to :js
 		@app=current_user.apps.build(app_params)
 		if @app.save
 			# redirect_to apps_path,notice: t(".success")
 			redirect_to @app,notice: t(".success")
 		else
-			puts @app.errors.full_messages
-			render 'new'
+			# puts @app.errors.full_messages
+			# render 'new'
 		end
 	end
 	def update
