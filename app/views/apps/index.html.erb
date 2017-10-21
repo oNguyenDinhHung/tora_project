@@ -8,7 +8,7 @@
 				<div class="col-md-3">
 					<%= image_tag app.picture,width: "100%"%> <br>
 					<%=link_to app.name,app%> <br>					
-					<%= star_rating_for app.rating %>
+					<%= star_rating_for app.rating_value %>(<%=app.review_number%>)
 				</div>
 			<% end %>
 		</div>		
