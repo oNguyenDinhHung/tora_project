@@ -30,3 +30,20 @@ img{
 .feedback{
 	color: red;
 }
+
+// css doan nay de khi hover qua picture thi show nut edit:
+div#show-avatar {  
+  position: relative;  
+}
+
+div#show-avatar:hover label{
+  display: block;
+}
+
+div#show-avatar label {
+  position:absolute;
+  top:0;
+  right:15px;
+  color: orange;
+  display:none;
+}
