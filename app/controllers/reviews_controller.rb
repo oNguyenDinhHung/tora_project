@@ -7,8 +7,8 @@ class ReviewsController < ApplicationController
 		else
 			@review=current_user.reviews.build(review_params)
 			@review.save
-		end	
-		ReviewJob.perform_later(params[:review][:app_id],@review)
+		end			
+		ReviewJob.perform_later(params[:review][:app_id],@review) if @review.id
 	end
 	private
 	def review_params

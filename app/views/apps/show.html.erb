@@ -12,7 +12,7 @@
 	</div>
 	<div class="col-md-7">
 		<%=@app.name%> <br>
-		<%=@app.rating||"****"%>|<%=@app.maker.try(:name)||"メーカー名"%>|<%=@app.apptype.name||"タイプ"%> <br>
+		<%=star_rating_for @app.rating %>|<%=@app.maker.try(:name)||"メーカー名"%>|<%=@app.apptype.name||"タイプ"%> <br>
 	</div>
 	<div class="col-md-2">
 		<%=link_to "ダウンロードページヘ",@app.link,target: "_blank",class: "btn btn-secondary"%>
@@ -71,7 +71,7 @@
 				<%=f.hidden_field :app_id,value: @app.id%>
 				<div class="form-group">
 					<%=f.label :value%>
-					<%=f.number_field :value,type: "number",class: "form-control" %>				
+					<%=f.number_field :value,min: 1,max: 5,class: "form-control" %>				
 					<div class="invalid-feedback" id="value_feedback"></div>
 				</div>
 				<div class="form-group">

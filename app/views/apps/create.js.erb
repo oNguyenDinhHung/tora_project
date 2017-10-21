@@ -1,11 +1,11 @@
 <% error_attributes=@app.errors.keys%>
 <% [:name,:maker,:store,:originid,:link,:category,:apptype].each do |attribute|%>
-	$("#<%=attribute%>_feedback").empty()
-	$("#app_<%=attribute%>").removeClass('is-invalid')
+	$("form#new_app #<%=attribute%>_feedback").empty()
+	$("form#new_app #app_<%=attribute%>").removeClass('is-invalid')
 	<% if error_attributes.include? attribute %>
-		$("#app_<%=attribute%>").addClass('is-invalid')		
+		$("form#new_app #app_<%=attribute%>").addClass('is-invalid')		
 		<% @app.errors.full_messages_for(attribute).each do |msg| %>
-			$("#<%=attribute%>_feedback").append("<li><%=msg%></li>")
+			$("form#new_app #<%=attribute%>_feedback").append("<li><%=msg%></li>")
 		<% end %>
 	<% end %>				
 <% end %>
