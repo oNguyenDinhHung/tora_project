@@ -5,15 +5,15 @@
 </div>
 <br>
 <div class="row">
-  <div class="col-md-4 mx-auto">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
+  <div class="col-md-5 mx-auto">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>    
     <div class="row form-group">
       <div class="col-md-4">
         <%= f.label :name %>
       </div>
       <div class="col-md-8">
-        <%= f.text_field :name, autofocus: true,class: "form-control"  %>
+        <%= f.text_field :name,class: "form-control"  %>
+        <%=errors_for resource,:name%>
       </div>
     </div>
     <div class="row form-group">
@@ -22,6 +22,7 @@
       </div>
       <div class="col-md-8">
         <%= f.email_field :email,readonly: true,class: "form-control" %>
+        <%=errors_for resource,:email%>
       </div>
     </div>
     <div class="row form-group">
@@ -29,13 +30,15 @@
         <%= f.label :avatar%>      
       </div>
       <div class="col-md-8">
-        <% if resource.avatar&&resource.avatar.present? %>
-          <%= image_tag resource.avatar%><br>
-        <% else %>
-          <%= image_tag "fallback/default.jpg"%><br>
-        <% end %>
-        <%= f.file_field :avatar %>
-        <%= f.hidden_field :avatar_cache %>
+        <label for="user_avatar">
+          <% if resource.avatar&&resource.avatar.present? %>
+            <%=image_tag resource.avatar,width: "100%"%>     
+          <% else %>
+            <%= image_tag "fallback/default.jpg"%><br>
+          <% end %>
+        </label>
+        <%= f.file_field :avatar,style: "display:none" %>
+        <%=errors_for resource,:avatar%>        
       </div>
     </div>
     <div class="row form-group">

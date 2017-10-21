@@ -7,7 +7,7 @@
 <div class="row">
   <div class="col-md-4 mx-auto">
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
+    
     <%= f.hidden_field :reset_password_token %>
     <div class="row form-group">
       <div class="col-md-5">
@@ -15,6 +15,7 @@
       </div>
       <div class="col-md-7">
         <%= f.password_field :password, autofocus: true, autocomplete: "off",class: "form-control" %>
+        <%=errors_for resource,:password%>
       </div>
     </div>
     <div class="row form-group">
@@ -23,6 +24,7 @@
       </div>
       <div class="col-md-7">
         <%= f.password_field :password_confirmation, autocomplete: "off",class: "form-control" %>
+        <%=errors_for resource,:password_confirmation%>
       </div>
     </div>
     <div class="row form-group">
