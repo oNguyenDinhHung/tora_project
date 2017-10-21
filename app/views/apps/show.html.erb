@@ -12,7 +12,7 @@
 	</div>
 	<div class="col-md-7">
 		<%=@app.name%> <br>
-		<%=star_rating_for @app.rating %>|<%=@app.maker.try(:name)||"メーカー名"%>|<%=@app.apptype.name||"タイプ"%> <br>
+		<%=star_rating_for @app.rating %>(<%=@app.reviews.count%>)|<%=@app.maker.try(:name)||"メーカー名"%>|<%=@app.apptype.name||"タイプ"%> <br>
 	</div>
 	<div class="col-md-2">
 		<%=link_to "ダウンロードページヘ",@app.link,target: "_blank",class: "btn btn-secondary"%>

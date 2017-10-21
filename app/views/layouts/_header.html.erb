@@ -1,13 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 50px;">
-  <a class="navbar-brand" href="#"><%=t 'websitename'%></a>
+  <%=link_to t('websitename'),root_path,class: "navbar-brand fa fa-home fa-2x"%>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <%=link_to t('home'),root_path,class: "nav-link"%>
-      </li>
+    <ul class="navbar-nav mr-auto">      
       <li class="nav-item">
         <%=link_to t("views.app.new_app"),new_app_path,class: "nav-link" if user_signed_in? %>
       </li>

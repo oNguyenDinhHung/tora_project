@@ -1,7 +1,10 @@
 class AppsController < ApplicationController
 	before_action :authenticate_user!,except: [:index,:show]
 	def index
-		@apps=App.all
+		@apps=App.left_outer_joins(:reviews)
+		.group("apps.id")
+		.select("apps.*","count(reviews.id) as review_number","avg(reviews.value) as rating_value")
+		.order("rating_value desc","review_number desc")
 	end
 	def new
 		@app=App.new		
