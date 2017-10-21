@@ -21,4 +21,13 @@ module DeviseHelper
     !resource.errors.empty?
   end
 
+  def errors_for resource,attribute
+    messages = resource.errors.full_messages_for(attribute) { |msg| content_tag(:li, msg) }.join
+    html = <<-HTML
+      <div class="feedback">
+        <ul>#{messages}</ul>
+      </div>
+    HTML
+    html.html_safe
+  end
 end
