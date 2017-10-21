@@ -29,14 +29,13 @@
       <div class="col-md-4">
         <%= f.label :avatar%>      
       </div>
-      <div class="col-md-8">
-        <label for="user_avatar">
-          <% if resource.avatar&&resource.avatar.present? %>
-            <%=image_tag resource.avatar,width: "100%"%>     
-          <% else %>
-            <%= image_tag "fallback/default.jpg"%><br>
-          <% end %>
-        </label>
+      <div class="col-md-8" id="show-avatar">
+        <% if resource.avatar&&resource.avatar.present? %>
+          <%=image_tag resource.avatar,width: "100%"%>     
+        <% else %>
+          <%= image_tag "fallback/default.jpg"%><br>
+        <% end %>       
+        <label for="user_avatar" class="fa fa-edit fa-3x"></label>
         <%= f.file_field :avatar,style: "display:none" %>
         <%=errors_for resource,:avatar%>        
       </div>
