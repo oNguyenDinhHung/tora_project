@@ -14,7 +14,7 @@ ja:
   didntrecvunlock: "ロック解除を受け取りませんでしたか"
   sendmeresetmail: "私にリセットパスワードの指示を送ってください"
   resendconfirmail: "確認の指示を再送信"
-  are_you_sure: "削除しますか"  
+  are_you_sure: "削除しますか"   
   activerecord:
     models:
       user: "ユーザー"
@@ -63,6 +63,7 @@ ja:
   views:
     app:
       new_app: "アプリを登録"
+      no_review: "レビューなし"
     photo:
       modal_title: "イメージ%{id}"
       modal_close: "閉じる "
