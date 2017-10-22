@@ -1,13 +1,15 @@
-<div id="review_<%=review.id%>" class="row">
+<div id="review_<%=review.id%>" class="row review">	
 	<div class="col-md-2">
 		<%=image_tag review.user.avatar,size: "50x50"%>
 	</div>
 	<div class="col-md-10">
 		<div class="row">
-			<%=review.user.name%>|<%=review.created_at%>|<%=review.value%>
+			<b><%=review.user.name%></b>&nbsp;
+			<%=l(review.updated_at,format: "%Y年%m月%d日(%a)")%>&nbsp;
+			<%=star_rating_for review.value%>
 		</div>
 		<div class="row">
-			<%=review.text%>
+			<%=simple_format review.text%>
 		</div>
 	</div>
 </div>

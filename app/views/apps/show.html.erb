@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-2 ml-auto">
 		<% if user_signed_in?&&current_user==@app.user %>		
 			<%= form_for @app,html: {id: 'update_app_picture'},remote: true do |f| %>					  
 			  <label for="app_picture"><%=image_tag @app.picture,width: "100%"%></label>
@@ -10,11 +10,12 @@
 			<%=image_tag @app.picture,width: "100%"%>
 		<% end %>
 	</div>
-	<div class="col-md-7">
-		<%=@app.name%> <br>
-		<%=star_rating_for @app.rating %>(<%=@app.reviews.count%>)|<%=@app.maker.try(:name)||"メーカー名"%>|<%=@app.apptype.name||"タイプ"%> <br>
+	<div class="col-md-6">
+		<h1><%=@app.name%></h1>
+		<h3><%=t('views.app.by',maker: @app.maker.try(:name)||"メーカー名")%></h3>
+		<%=star_rating_for @app.rating %>(<%=@app.reviews.count%>)
 	</div>
-	<div class="col-md-2">
+	<div class="col-md-2 mr-auto">
 		<%=link_to "ダウンロードページヘ",@app.link,target: "_blank",class: "btn btn-secondary"%>
 	</div>
 </div>
@@ -28,7 +29,7 @@
 </div>
 
 <div class="row" id="gaiyou">
-	<div class="col-md-8">
+	<div class="col-md-6 ml-auto">
 		デモの写真
 		<div id="app_<%=@app.id%>_photos">
 			<%=render @app.photos%>
@@ -44,29 +45,29 @@
 			</div>			
 		<% end %>
 	</div>
-	<div class="col-md-4">
-		アプリの情報<br>
+	<div class="col-md-3 mr-auto">
+		<h4>アプリの情報</h4>
 		<% if user_signed_in?&&current_user==@app.user %>		
 			<%= form_for @app,html: {id: 'update_app_description'},remote: true do |f| %>			  
-	      <%= f.text_area :description,:readonly => true,class: "form-control"%>
+	      <%= f.text_area :description,rows: "10",readonly: true,class: "form-control"%>
 	      <%= f.submit nil,style: "display:none",form: 'update_app_description' %>
 			<% end %>
 		<% else %>
-			<%=text_area_tag nil,@app.description,class: "form-control",readonly: true%>
+			<%=text_area_tag nil,@app.description,rows: "10",class: "form-control",readonly: true%>
 		<% end %>
 	</div>
 </div>
 
 <div class="row" id="review" style="display: none;">
-	<div class="col-md-8">
-		ユーザレビュー
+	<div class="col-md-6 ml-auto">
+		<h4><b>ユーザレビュー</b></h4>
 		<div id="app_<%=@app.id%>_reviews">
 			<%=render @app.reviews%>
 		</div>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-4 mr-auto">
 		<% if user_signed_in? %>
-			評価してください
+			<h4><b>このアプリケーションを評価</b></h4>
 			<%=form_for Review.new,remote: true do |f| %>
 				<%=f.hidden_field :app_id,value: @app.id%>
 				<div class="form-group">
@@ -76,7 +77,7 @@
 				</div>
 				<div class="form-group">
 					<%=f.label :text%>
-					<%=f.text_area :text,class: "form-control"%>				
+					<%=f.text_area :text,rows: "10",class: "form-control"%>				
 					<div class="invalid-feedback" id="text_feedback"></div>
 				</div>
 				<div class="form-group">
@@ -88,21 +89,21 @@
 </div>
 
 <div class="row" id="kuchikomi" style="display: none;">
-	<div class="col-md-8">
-		ユーザコメント
+	<div class="col-md-6 ml-auto">
+		<h4><b>ユーザコメント</b></h4>
 		<div id="app_<%=@app.id%>_kuchikomis">
 			<%=render @app.kuchikomis%>
 		</div>
 	</div>
-	<div class="col-md-4">		
+	<div class="col-md-3 mr-auto">		
 		<% if user_signed_in? %>
-			コメントしてください
+			<h4><b>コメントしてください</b></h4>
 			<%=form_for Kuchikomi.new,remote: true do |f| %>
 				<%=f.hidden_field :app_id,value: @app.id%>
 				
 				<div class="form-group">
 					<%=f.label :text%>
-					<%=f.text_area :text,class: "form-control"%>				
+					<%=f.text_area :text,rows: "10",class: "form-control"%>				
 					<div class="invalid-feedback" id="text_feedback"></div>
 				</div>
 				<div class="form-group">
