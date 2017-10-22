@@ -5,7 +5,8 @@
 	<div class="col-md-10">
 		<div class="row">
 			<b><%=kuchikomi.user.name%></b>&nbsp;
-			<%=l(kuchikomi.created_at,format: "%Y年%m月%d日(%a) %H:%M:%S")%>
+			<%=l(kuchikomi.created_at,format: "%Y年%m月%d日(%a) %H:%M:%S")%>&nbsp;
+			<%=link_to '',kuchikomi,method: :delete,remote: true,data: {confirm: t("are_you_sure")},class: "fa fa-close" if kuchikomi.user==current_user%>
 		</div>
 		<div class="row">
 			<%=simple_format kuchikomi.text%>

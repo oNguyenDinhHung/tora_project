@@ -8,7 +8,12 @@ class KuchikomisController < ApplicationController
 			@kuchikomi=current_user.kuchikomis.build(kuchikomi_params)
 			@kuchikomi.save
 		# end	
-		KuchikomiJob.perform_later(params[:kuchikomi][:app_id],@kuchikomi) if @kuchikomi.id
+		KuchikomiJob.perform_later(params[:kuchikomi][:app_id],@kuchikomi,current_user) if @kuchikomi.id
+	end
+	def destroy
+		respond_to :js
+		@kuchikomi=current_user.kuchikomis.find_by_id params[:id]
+		@kuchikomi.destroy if @kuchikomi
 	end
 	private
 	def kuchikomi_params
