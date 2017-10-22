@@ -64,6 +64,7 @@ ja:
     app:
       new_app: "アプリを登録"
       no_review: "レビューなし"
+      by: "%{maker}提供"
     photo:
       modal_title: "イメージ%{id}"
       modal_close: "閉じる "
