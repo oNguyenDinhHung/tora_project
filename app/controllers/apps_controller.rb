@@ -22,7 +22,7 @@ class AppsController < ApplicationController
 			# redirect_to apps_path,notice: t(".success")
 			redirect_to @app,notice: t(".success")
 		else
-			# puts @app.errors.full_messages
+			# puts @app.errors.full_meszsages
 			# render 'new'
 		end
 	end
