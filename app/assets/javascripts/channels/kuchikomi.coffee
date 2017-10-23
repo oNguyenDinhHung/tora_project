@@ -10,4 +10,5 @@ App.kuchikomi = App.cable.subscriptions.create "KuchikomiChannel",
     # if $("#app_"+data.app_id+"_kuchikomis").find("div#kuchikomi_"+data.kuchikomi_id).length
   #    	$("div#kuchikomi_"+data.kuchikomi_id).replaceWith(data.kuchikomi_template)
   #   else
-    $("#app_"+data.app_id+"_kuchikomis").append(data.kuchikomi_template)
+    # $("#app_"+data.app_id+"_kuchikomis").append(data.kuchikomi_template)
+    $(data.kuchikomi_template).prependTo($("#app_"+data.app_id+"_kuchikomis")).hide().show(1500);
