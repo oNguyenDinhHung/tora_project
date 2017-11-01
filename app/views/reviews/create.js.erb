@@ -9,3 +9,6 @@
 		<% end %>
 	<% end %>				
 <% end %>
+<% unless @review.errors.any?%>
+	window.location="/apps/<%=@review.app.id%>"
+<% end	%>

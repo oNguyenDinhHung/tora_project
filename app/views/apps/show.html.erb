@@ -31,7 +31,7 @@
 <div class="row" id="gaiyou">
 	<div class="col-md-6 ml-auto">		
 		<div id="app_<%=@app.id%>_photos">
-			<%=render @app.photos%>
+			<!--<%=render @app.photos%>-->
 		</div>
 		<img id="tmp_photo">
 		<% if user_signed_in?&&current_user==@app.user %>
@@ -61,7 +61,7 @@
 	<div class="col-md-6 ml-auto">
 		<h4><b>ユーザレビュー</b></h4>
 		<div id="app_<%=@app.id%>_reviews">
-			<%=render @app.reviews%>
+			<%=render @app.reviews.order(updated_at: :desc)%>
 		</div>
 	</div>
 	<div class="col-md-4 mr-auto">
