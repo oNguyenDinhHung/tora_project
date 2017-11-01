@@ -1,42 +1,57 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 50px;">
-  <%=link_to t('websitename'),root_path,class: "navbar-brand fa fa-home fa-2x"%>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e0d616; margin-bottom: 50px;">
+  <%=link_to t("websitename"),root_path, class: 'navbar-brand ml-5' %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav mr-auto">      
-      <li class="nav-item">
-        <%=link_to t("views.app.new_app"),new_app_path,class: "nav-link" if user_signed_in? %>
-      </li>
-      <li class="nav-item">
-        <%=link_to t("views.maker.maker_list"),makers_path,class: "nav-link" if user_signed_in?&&current_user.admin? %>
-      </li>
-      <li>
-        <%=link_to t("views.store.store_list"),stores_path,class: "nav-link" if user_signed_in?&&current_user.admin? %>
-      </li>
-      <li>
-        <%=link_to t("views.category.category_list"),categories_path,class: "nav-link" if user_signed_in?&&current_user.admin? %>
-      </li>
-      <li>
-        <%=link_to t("views.apptype.apptype_list"),apptypes_path,class: "nav-link" if user_signed_in?&&current_user.admin? %>
-      </li>
+
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto mr-4">
     </ul>
-    <ul class="navbar-nav nav-right">
-      <% if user_signed_in? %>
-        <li><%=image_tag current_user.avatar,size: "40x40"%></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%=current_user.name%>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <%=link_to t('profile'),edit_user_registration_path,class: "fa fa-user dropdown-item"%>
-            <%=link_to t("sign_out"),destroy_user_session_path,method: :delete,class: "fa fa-sign-out dropdown-item"%>
-          </div>
+    <%=link_to t("views.app.new_app"),new_app_path,class: "btn btn-warning mr-2" if user_signed_in? %>
+    <div class="dropdown my-dropdown mr-5">
+      <a class="mr-1" data-toggle="dropdown">
+        <% if user_signed_in? %>
+        <%=image_tag current_user.avatar,size: "40x40",class: "avatar mr-2"%><%= current_user.name %>
+        <% else %>
+        新しいユーザー ?
+        <% end %>
+      </a>
+      <ul class="dropdown-menu">
+
+        <li class="nav-item"><%=link_to t('profile'),edit_user_registration_path,class: "nav-link fa fa-user dropdown-item" if user_signed_in? %></li>
+        <li class="nav-item"><%=link_to t("views.maker.maker_list"),makers_path,class: "nav-link fa fa-window-restore dropdown-item" if user_signed_in?&&current_user.admin? %></li>
+        <li class="nav-item"><%=link_to t("views.store.store_list"),stores_path,class: "nav-link fa fa-cart-plus dropdown-item" if user_signed_in?&&current_user.admin? %></li>
+        <li class="nav-item"><%=link_to t("views.category.category_list"),categories_path,class: "nav-link" if user_signed_in?&&current_user.admin? %></li>
+        <li class="nav-item"><%=link_to t("views.apptype.apptype_list"),apptypes_path,class: "nav-link" if user_signed_in?&&current_user.admin? %></li>
+        <li class="nav-item"><%=link_to t("sign_up"),new_user_registration_path,class: "nav-link fa fa-user-plus dropdown-item" if !user_signed_in? %></li>
+        <li class="nav-item"><%=link_to t("log_in"),new_user_session_path,class: "nav-link fa fa-sign-in dropdown-item" if !user_signed_in? %></li>
+        <li class="nav-item"><%=link_to t("sign_out"),destroy_user_session_path,method: :delete,class: "nav-link fa fa-sign-out dropdown-item" if user_signed_in? %></li>
+
+      </ul>
+    </div>
+
+    <div class="dropdown mr-5">
+      <a class="mr-5" data-toggle="dropdown">
+        <button class="btn my-2 my-sm-0" type="submit"><i class="fa fa-cog" aria-hidden="true"></i></button>
+      </a>
+      <ul class="dropdown-menu">
+        <li class="nav-item">
+          <a class="nav-link" href="#">マイ アプリ</a>
         </li>
-      <% else %>
-        <li><%=link_to t("sign_up"),new_user_registration_path,class: "nav-link fa fa-user-plus"%></li>
-        <li><%=link_to t("log_in"),new_user_session_path,class: "nav-link fa fa-sign-in"%></li>
-      <% end %>
-    </ul>    
+        <li class="nav-item">
+          <a class="nav-link" href="#">言語</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">プライバシー ポリシー</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">利用規約</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">プライバシー ポリシー</a>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </nav>

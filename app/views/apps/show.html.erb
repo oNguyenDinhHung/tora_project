@@ -4,7 +4,7 @@
 			<%= form_for @app,html: {id: 'update_app_picture'},remote: true do |f| %>					  
 			  <label for="app_picture"><%=image_tag @app.picture,width: "100%"%></label>
 	      <%= f.file_field :picture,style: "display:none"%>
-	      <%= f.submit nil,style: "display:none",form: 'update_app_picture' %>
+	      <%= f.submit nil,style: "display:none",form: 'update_app_picture', :class => 'btn btn-success' %>
 			<% end %>
 		<% else %>
 			<%=image_tag @app.picture,width: "100%"%>
@@ -37,14 +37,15 @@
 		<% if user_signed_in?&&current_user==@app.user %>
 			<div class="col-md-3 mx-auto">
 				<%=form_for Photo.new,html: {id: 'new_photo'},remote: true do |f|%>					
-					<label for="photo_image"><%=image_tag "plus.png",width: "100%"%></label>
+					<label for="photo_image"><%=image_tag "plus.png",width: "50%"%></label>
 			    <%= f.file_field :image,style: "display:none"%> <br>
-					<%= f.submit nil,style: "display:none"%>
+					<%= f.submit nil,style: "display:none", :class => 'btn btn-success' %>
 				<% end %>
-			</div>			
+			</div>
+
 		<% end %>
 	</div>
-	<div class="col-md-3 mr-auto">
+	<div class="col-md-4 mr-auto">
 		<h4>アプリの情報</h4>
 		<% if user_signed_in?&&current_user==@app.user %>		
 			<%= form_for @app,html: {id: 'update_app_description'},remote: true do |f| %>			  
@@ -80,7 +81,7 @@
 					<div class="invalid-feedback" id="text_feedback"></div>
 				</div>
 				<div class="form-group">
-					<%=f.submit%>
+					<%=f.submit :class => 'btn btn-success' %>
 				</div>
 			<% end %>
 		<% end %>
@@ -94,7 +95,7 @@
 			<%=render @app.kuchikomis%>
 		</div>
 	</div>
-	<div class="col-md-3 mr-auto">		
+	<div class="col-md-4 mr-auto">		
 		<% if user_signed_in? %>
 			<h4><b>コメントしてください</b></h4>
 			<%=form_for Kuchikomi.new,remote: true do |f| %>
@@ -106,7 +107,7 @@
 					<div class="invalid-feedback" id="text_feedback"></div>
 				</div>
 				<div class="form-group">
-					<%=f.submit%>
+					<%=f.submit :class => 'btn btn-success' %>
 				</div>
 			<% end %>
 		<% end %>

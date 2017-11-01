@@ -7,74 +7,127 @@
 <div class="row">	
 	<div class="col-md-4 mx-auto">
 		<%=form_for @app,remote: true do |f| %>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :name%>
-				</div>
-				<div class="col-md-8">
-					<%=f.text_field :name,class: "form-control"%>
-					<div class="invalid-feedback" id="name_feedback"></div>
-				</div>				
+		<div class="row form-group">
+			<div class="col-md-5">
+				<%=f.label :name, class: "hidden"%>
 			</div>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :maker_id%>
-				</div>
-				<div class="col-md-8">
-					<%=f.select :maker_id,Maker.all.map {|x| [x.name,x.id]},{},{class: "form-control"}%>
-					<div class="invalid-feedback" id="maker_feedback"></div>
-				</div>				
-			</div>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :store_id%>
-				</div>				
-				<div class="col-md-8">
-					<%=f.select :store_id,Store.all.map {|x| [x.name,x.id]},{},{class: "form-control"} %>
-					<div class="invalid-feedback" id="store_feedback"></div>
+
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="sr-only" for="email">Application name</label>
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-window-restore"></i></div>
+						<%=f.text_field :name, class: "form-control", placeholder: "アプリ名" %>
+						<div class="invalid-feedback" id="name_feedback"></div>
+					</div>
 				</div>
 			</div>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :originid%>
-				</div>				
-				<div class="col-md-8">
-					<%=f.text_field :originid,class: "form-control"%>
-					<div class="invalid-feedback" id="originid_feedback"></div>					
+
+
+		</div>
+		<span class="text-success align-middle">メーカー</span>
+		<div class="row form-group">
+			<div class="col-md-5">
+				<%=f.label :maker_id, class: "hidden"%>
+			</div>
+
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="sr-only" for="email">Maker</label>
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-users"></i></div>
+						<%=f.select :maker_id,Maker.all.map {|x| [x.name,x.id]},{},class: "form-control"%>
+						<div class="invalid-feedback" id="maker_feedback"></div>
+					</div>
 				</div>
 			</div>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :link%>
-				</div>				
-				<div class="col-md-8">
-					<%=f.text_field :link,class: "form-control"%>
-					<div class="invalid-feedback" id="link_feedback"></div>				
+		</div>
+		<span class="text-success align-middle">ストアー</span>
+		<div class="row form-group">
+			<div class="col-md-5">
+				<%=f.label :store_id, class: "hidden"%>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="sr-only" for="password">Store</label>
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-building-o"></i></div>
+						<%=f.select :store_id,Store.all.map {|x| [x.name,x.id]},{},class: "form-control"%>
+						<div class="invalid-feedback" id="store_feedback"></div>
+					</div>
 				</div>
 			</div>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :category_id%>
-				</div>
-				<div class="col-md-8">
-					<%=f.select :category_id,Category.all.map {|x| [x.name,x.id]},{},{class: "form-control"} %>
-					<div class="invalid-feedback" id="category_feedback"></div>
+		</div>
+
+		<div class="row form-group">
+			<div class="col-md-5">
+				<%=f.label :originid, class: "hidden"%>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="sr-only" for="password">OriginID</label>
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-id-badge"></i></div>
+						<%=f.text_field :originid,class: "form-control", placeholder: "オリジンID" %>
+						<div class="invalid-feedback" id="originid_feedback"></div>					
+					</div>
 				</div>
 			</div>
-			<div class="row form-group">
-				<div class="col-md-4">
-					<%=f.label :apptype_id%>
-				</div>
-				<div class="col-md-8">
-					<%=f.select :apptype_id,Apptype.all.map {|x| [x.name,x.id]},{},{class: "form-control"} %>
-					<div class="invalid-feedback" id="apptype_feedback"></div>
+		</div>
+
+		<div class="row form-group">
+			<div class="col-md-5">
+				<%=f.label :link, class: "hidden"%>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="sr-only" for="password">Link</label>
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-external-link"></i></div>
+						<%=f.text_field :link,class: "form-control", placeholder: "リンク" %>
+						<div class="invalid-feedback" id="link_feedback"></div>				
+					</div>
 				</div>
 			</div>
-			<div class="row form-group">
-				<div class="col-md-4 mx-auto">
-					<%=f.submit %>
-				</div>						
+		</div>
+		<span class="text-success align-middle">カテゴリ</span>
+		<div class="row form-group">
+			<div class="col-md-5">
+				<%=f.label :category_id, class: "hidden"%>
 			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="sr-only" for="password">OriginID</label>
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-list"></i></div>
+						<%=f.select :category_id,Category.all.map {|x| [x.name,x.id]},{},{class: "form-control"} %>
+						<div class="invalid-feedback" id="category_feedback"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="text-success align-middle">タイプ</span>
+		<div class="row form-group">
+			<div class="col-md-5">
+				<%=f.label :apptype_id, class: "hidden"%>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="sr-only" for="password">OriginID</label>
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-sitemap"></i></div>
+						<%=f.select :apptype_id,Apptype.all.map {|x| [x.name,x.id]},{},class: "form-control"%>
+						<div class="invalid-feedback" id="apptype_feedback"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row form-group">
+			<div class="col-md-5">
+				<%=f.submit :class => 'btn btn-success' %>
+			</div>						
+		</div>
 		<%end%>
 	</div>
 </div>
