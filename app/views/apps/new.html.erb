@@ -122,7 +122,22 @@
 				</div>
 			</div>
 		</div>
-
+		<span class="text-success align-middle">イメージ</span>
+		<div class="row form-group">
+			<div class="col-md-5">
+				<%=f.label :picture, class: "hidden"%>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label class="sr-only" for="password">OriginID</label>
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<label for="app_picture"><%=image_tag @app.picture,width: "100%"%></label>
+	      		<%= f.file_field :picture,style: "display:none"%>
+						<div class="invalid-feedback" id="apptype_feedback"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="row form-group">
 			<div class="col-md-5">
 				<%=f.submit :class => 'btn btn-success' %>
