@@ -30,7 +30,7 @@ ja:
         avatar: "アバター"
         password: "パスワード"
         password_confirmation: "パスワード確認"
-        remember_me: "このコンピュータで私を覚えている"
+        remember_me: "ログイン状態を保持する"
       app:
         name: "アプリ名"
         maker_id: "メーカー"
