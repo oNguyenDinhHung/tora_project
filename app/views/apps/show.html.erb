@@ -21,7 +21,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-6 mx-auto">
+	<div class="col-md-6 mx-auto btn-group btn-group-justified">
 		<button id="gaiyou_btn" class="btn btn-primary disabled">概要</button>
 		<button id="review_btn" class="btn btn-primary">レビュー</button>
 		<button id="kuchikomi_btn" class="btn btn-primary">コメント</button>
@@ -31,21 +31,16 @@
 <div class="row" id="gaiyou">
 	<div class="col-md-6 ml-auto">		
 		<div id="app_<%=@app.id%>_photos">
-			<%=render @app.photos%>
+      <% @app.photos.each.with_index do |photo, index| %>
+          <div id="photo_<%= index%>" style="margin-top: 20px;margin-bottom: 20px;border: solid 5px green;border-radius: 10px;">
+            <%=image_tag photo.url,width: "100%",data: {toggle: "modal",target: "#modal_photo_#{index}"}%>
+            <%=render 'photos/photo', photo: photo%>
+          </div>
+      <% end %>
 		</div>
-		<img id="tmp_photo">
-		<% if user_signed_in?&&current_user==@app.user %>
-			<div class="col-md-3 mx-auto">
-				<%=form_for Photo.new,html: {id: 'new_photo'},remote: true do |f|%>					
-					<label for="photo_image"><%=image_tag "plus.png",width: "50%"%></label>
-			    <%= f.file_field :image,style: "display:none"%> <br>
-					<%= f.submit nil,style: "display:none", :class => 'btn btn-success' %>
-				<% end %>
-			</div>
 
-		<% end %>
 	</div>
-	<div class="col-md-4 mr-auto">
+	<!--<div class="col-md-4 mr-auto">
 		<h4>アプリの情報</h4>
 		<% if user_signed_in?&&current_user==@app.user %>		
 			<%= form_for @app,html: {id: 'update_app_description'},remote: true do |f| %>			  
@@ -55,15 +50,19 @@
 		<% else %>
 			<%=text_area_tag nil,@app.description,rows: "10",class: "form-control",readonly: true%>
 		<% end %>
-	</div>
+	</div>-->
 </div>
 
 <div class="row" id="review" style="display: none;">
 	<div class="col-md-6 ml-auto">
-		<h4><b>ユーザレビュー</b></h4>
-		<div id="app_<%=@app.id%>_reviews">
-			<%=render @app.reviews%>
-		</div>
+    <%= render 'apps/rating_card' %>
+    <div class="row">
+      <h4><b>ユーザレビュー</b></h4>
+      <div id="app_<%=@app.id%>_reviews">
+        <%=render @app.reviews%>
+      </div>
+    </div>
+
 	</div>
 	<div class="col-md-4 mr-auto">
 		<% if user_signed_in? %>
