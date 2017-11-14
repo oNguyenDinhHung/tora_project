@@ -1,0 +1,21 @@
+{
+  "name": "tora",
+  "description": "",
+  "main": "",
+  "authors": [
+    "taohansamu <dinhtao995>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/taohansamu/tora_project",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-star-rating": "^4.0.3"
+  }
+}

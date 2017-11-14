@@ -1,114 +1,284 @@
-<div class="row">
-	<div class="col-md-2 ml-auto">
-		<% if user_signed_in?&&current_user==@app.user %>		
-			<%= form_for @app,html: {id: 'update_app_picture'},remote: true do |f| %>					  
-			  <label for="app_picture"><%=image_tag @app.picture,width: "100%"%></label>
-	      <%= f.file_field :picture,style: "display:none"%>
-	      <%= f.submit nil,style: "display:none",form: 'update_app_picture', :class => 'btn btn-success' %>
-			<% end %>
-		<% else %>
-			<%=image_tag @app.picture,width: "100%"%>
-		<% end %>
-	</div>
-	<div class="col-md-6">
-		<h1><%=@app.name%></h1>
-		<h3><%=t('views.app.by',maker: @app.maker.try(:name)||"メーカー名")%></h3>
-		<%=star_rating_for @app.rating %>(<%=@app.reviews.count%>)
-	</div>
-	<div class="col-md-2 mr-auto">
-		<%=link_to "ダウンロードページヘ",@app.link,target: "_blank",class: "btn btn-secondary"%>
-	</div>
-</div>
+<style>
+	.btn-grey {
+		background-color: #D8D8D8;
+		color: #FFF;
+	}
 
-<div class="row">
-	<div class="col-md-6 mx-auto btn-group btn-group-justified">
-		<button id="gaiyou_btn" class="btn btn-primary disabled">概要</button>
-		<button id="review_btn" class="btn btn-primary">レビュー</button>
-		<button id="kuchikomi_btn" class="btn btn-primary">コメント</button>
-	</div>
-</div>
+	.rating-block {
+		background-color: #FAFAFA;
+		border: 1px solid #EFEFEF;
+		padding: 15px 15px 20px 15px;
+		border-radius: 3px;
+	}
 
-<div class="row" id="gaiyou">
-	<div class="col-md-6 ml-auto">		
-		<div id="app_<%=@app.id%>_photos">
-      <% @app.photos.each.with_index do |photo, index| %>
-          <div id="photo_<%= index%>" style="margin-top: 20px;margin-bottom: 20px;border: solid 5px green;border-radius: 10px;">
-            <%=image_tag photo.url,width: "100%",data: {toggle: "modal",target: "#modal_photo_#{index}"}%>
-            <%=render 'photos/photo', photo: photo%>
-          </div>
-      <% end %>
-		</div>
+	.bold {
+		font-weight: 700;
+	}
 
-	</div>
-	<!--<div class="col-md-4 mr-auto">
-		<h4>アプリの情報</h4>
-		<% if user_signed_in?&&current_user==@app.user %>		
-			<%= form_for @app,html: {id: 'update_app_description'},remote: true do |f| %>			  
-	      <%= f.text_area :description,rows: "10",readonly: true,class: "form-control"%>
-	      <%= f.submit nil,style: "display:none",form: 'update_app_description' %>
-			<% end %>
-		<% else %>
-			<%=text_area_tag nil,@app.description,rows: "10",class: "form-control",readonly: true%>
-		<% end %>
-	</div>-->
-</div>
+	.padding-bottom-7 {
+		padding-bottom: 7px;
+	}
 
-<div class="row" id="review" style="display: none;">
-	<div class="col-md-6 ml-auto">
-    <%= render 'apps/rating_card' %>
-    <div class="row">
-      <h4><b>ユーザレビュー</b></h4>
-      <div id="app_<%=@app.id%>_reviews">
-        <%=render @app.reviews%>
-      </div>
-    </div>
+	.review-block {
+		background-color: #FAFAFA;
+		border: 1px solid #EFEFEF;
+		padding: 15px;
+		border-radius: 3px;
+		margin-bottom: 15px;
+	}
 
-	</div>
-	<div class="col-md-4 mr-auto">
-		<% if user_signed_in? %>
-			<h4><b>このアプリケーションを評価</b></h4>
-			<%=form_for Review.new,remote: true do |f| %>
-				<%=f.hidden_field :app_id,value: @app.id%>
-				<div class="form-group">
-					<%=f.label :value%>
-					<%=f.number_field :value,min: 1,max: 5,class: "form-control" %>				
-					<div class="invalid-feedback" id="value_feedback"></div>
-				</div>
-				<div class="form-group">
-					<%=f.label :text%>
-					<%=f.text_area :text,rows: "10",class: "form-control"%>				
-					<div class="invalid-feedback" id="text_feedback"></div>
-				</div>
-				<div class="form-group">
-					<%=f.submit :class => 'btn btn-success' %>
-				</div>
-			<% end %>
-		<% end %>
-	</div>
-</div>
+	.review-block-name {
+		font-size: 12px;
+		margin: 10px 0;
+	}
 
-<div class="row" id="kuchikomi" style="display: none;">
-	<div class="col-md-6 ml-auto">
-		<h4><b>ユーザコメント</b></h4>
-		<div id="app_<%=@app.id%>_kuchikomis">
-			<%=render @app.kuchikomis%>
+	.review-block-date {
+		font-size: 12px;
+	}
+
+	.review-block-rate {
+		font-size: 13px;
+		margin-bottom: 15px;
+	}
+
+	.review-block-title {
+		font-size: 15px;
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+
+	.review-block-description {
+		font-size: 13px;
+	}
+
+	.nav-item.a {
+		color: #FFF0F5
+	}
+</style>
+<!-- Thông tin trên cùng -->
+<div class="container">
+	<div class="container">
+		<div class="media">
+			<div class="media-left col-md-2">
+				<%=image_tag @app.picture.url, width: "100%", class:"media-object" %>
+			</div>
+			<div class="media-body">
+				<h1 class="media-heading">
+					<%=@app.name%>
+				</h1>
+			</div>
+
+			<br>
+			<h4>
+				<%=t('views.app.by',maker: @app.maker.try(:name)||"メーカー名")%>
+			</h4>
+			<button type="button" class="btn btn-success">Review
+				<span class="badge">3</span>
+			</button>
+			<a href="#" class="btn btn-success">
+				<span class="fa fa-external-link"></span>
+				<%=link_to "ダウンロードページヘ",@app.link,target: "_blank",class: "btn btn-secondary"%>
+			</a>
 		</div>
 	</div>
-	<div class="col-md-4 mr-auto">		
-		<% if user_signed_in? %>
-			<h4><b>コメントしてください</b></h4>
-			<%=form_for Kuchikomi.new,remote: true do |f| %>
-				<%=f.hidden_field :app_id,value: @app.id%>
+</div>
+<br>
+<hr>
+
+<!-- 3 cái nút -->
+<ul class="nav nav-pills nav-justified" role="tablist">
+	<li class="nav-item active">
+		<a class="nav-link active" data-toggle="pill" href="#overview">概要</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" data-toggle="pill" href="#reviews">レビュー</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" data-toggle="pill" href="#comments">コメント</a>
+	</li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+
+
+	<div id="overview" class="container tab-pane active">
+		<%= render 'apps/app_overview'%>
+	</div>
+
+	<!-- Phần reviews -->
+	<div id="reviews" class="container tab-pane fade">
+		<br>
+
+		<div class="container">
+
+			<%= render 'reviews/form' %>
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="rating-block">
+							<h4>Average user rating</h4>
+							<h2 class="bold padding-bottom-7">4.3
+								<small>/ 5</small>
+							</h2>
+							<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+							</button>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<h4>Rating breakdown</h4>
+						<div class="pull-left">
+							<div class="pull-left" style="width:35px; line-height:1;">
+								<div style="height:9px; margin:5px 0;">5
+									<span class="glyphicon glyphicon-star"></span>
+								</div>
+							</div>
+							<div class="pull-left" style="width:180px;">
+								<div class="progress" style="height:9px; margin:8px 0;">
+									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 1000%">
+										<span class="sr-only">80% Complete (danger)</span>
+									</div>
+								</div>
+							</div>
+							<div class="pull-right" style="margin-left:10px;">1</div>
+						</div>
+						<div class="pull-left">
+							<div class="pull-left" style="width:35px; line-height:1;">
+								<div style="height:9px; margin:5px 0;">4
+									<span class="glyphicon glyphicon-star"></span>
+								</div>
+							</div>
+							<div class="pull-left" style="width:180px;">
+								<div class="progress" style="height:9px; margin:8px 0;">
+									<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" style="width: 80%">
+										<span class="sr-only">80% Complete (danger)</span>
+									</div>
+								</div>
+							</div>
+							<div class="pull-right" style="margin-left:10px;">1</div>
+						</div>
+						<div class="pull-left">
+							<div class="pull-left" style="width:35px; line-height:1;">
+								<div style="height:9px; margin:5px 0;">3
+									<span class="glyphicon glyphicon-star"></span>
+								</div>
+							</div>
+							<div class="pull-left" style="width:180px;">
+								<div class="progress" style="height:9px; margin:8px 0;">
+									<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5" style="width: 60%">
+										<span class="sr-only">80% Complete (danger)</span>
+									</div>
+								</div>
+							</div>
+							<div class="pull-right" style="margin-left:10px;">0</div>
+						</div>
+						<div class="pull-left">
+							<div class="pull-left" style="width:35px; line-height:1;">
+								<div style="height:9px; margin:5px 0;">2
+									<span class="glyphicon glyphicon-star"></span>
+								</div>
+							</div>
+							<div class="pull-left" style="width:180px;">
+								<div class="progress" style="height:9px; margin:8px 0;">
+									<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="5" style="width: 40%">
+										<span class="sr-only">80% Complete (danger)</span>
+									</div>
+								</div>
+							</div>
+							<div class="pull-right" style="margin-left:10px;">0</div>
+						</div>
+						<div class="pull-left">
+							<div class="pull-left" style="width:35px; line-height:1;">
+								<div style="height:9px; margin:5px 0;">1
+									<span class="glyphicon glyphicon-star"></span>
+								</div>
+							</div>
+							<div class="pull-left" style="width:180px;">
+								<div class="progress" style="height:9px; margin:8px 0;">
+									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5" style="width: 20%">
+										<span class="sr-only">80% Complete (danger)</span>
+									</div>
+								</div>
+							</div>
+							<div class="pull-right" style="margin-left:10px;">0</div>
+						</div>
+					</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-7">
+						<hr/>
+						<div id="app_<%=@app.id%>_reviews" class="review-block">
+							<%=render @app.reviews%>
+						</div>
+					</div>
+				</div>
+
+		</div>
+		<!-- Phần Comments -->
+		<div id="comments" class="container tab-pane fade">
+			<br>
+			<div id="comment_form" class="row">
+				<% if user_signed_in? %>
+					<h4>
+						<b>コメントしてください</b>
+					</h4>
+					<%=form_for Kuchikomi.new,remote: true do |f| %>
+						<%=f.hidden_field :app_id,value: @app.id%>
 				
-				<div class="form-group">
-					<%=f.label :text%>
-					<%=f.text_area :text,rows: "10",class: "form-control"%>				
-					<div class="invalid-feedback" id="text_feedback"></div>
+							<div class="form-group " class="col-md-6 col-md-offset-3">
+									<%=f.text_field :text,class: "form-control", placeholder: "コメントしてください"%>
+										<div class="invalid-feedback" id="text_feedback"></div>
+							</div>
+							<div class="form-group">
+								<%=f.submit :class => 'btn btn-success' %>
+							</div>
+							<% end %>
+								<% end %>
+			</div>
+								<div class="row">
+									<div id="app_<%=@app.id%>_kuchikomis" >
+										<%=render @app.kuchikomis%>
+									</div>
+								</div>
+		
+								<!-- <div class="media">
+					<div class="media-left">
+						<img src="images/avatar1.png" class="media-object img-circle" style="width:60px">
+					</div>
+					<div class="media-body">
+						<span class="pull-right">06.11.1995</span>
+						<h4 class="media-heading">Left-aligned</h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					</div>
 				</div>
-				<div class="form-group">
-					<%=f.submit :class => 'btn btn-success' %>
-				</div>
-			<% end %>
-		<% end %>
+				<hr>
+				<div class="media">
+					<div class="media-left">
+						<img src="images/avatar1.png" class="media-object img-circle" style="width:60px">
+					</div>
+					<div class="media-body">
+						<span class="pull-right">06.11.1995</span>
+						<h4 class="media-heading">Left-aligned</h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					</div>
+				</div> -->
+								<hr>
+		</div>
+		<!-- /container -->
+
 	</div>
-</div>
+

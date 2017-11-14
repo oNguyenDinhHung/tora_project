@@ -1,0 +1,39 @@
+<!-- Thay đoạn code này bằng advanced exp3: http://plugins.krajee.com/star-rating-demo-advanced-usage -->
+<% if user_signed_in? %>
+    <div class="row">
+        <% if @review %>
+            <a id="show_review_form_btn" class="btn btn-link col-md-4 col-md-offset-8" style="text-decoration: underline;">レビュー変更</a>
+            <hr>
+            <script>
+                $(document).ready(function () {
+                    $("#show_review_form_btn").click(function () {
+                        $("#review_form").toggle();
+                    });
+                });
+            </script>
+            <% end %>
+                <div id="review_form" <% if @review %> style="display:none"
+                    <% end %>>
+                        <h4>
+                            <b>このアプリケーションを評価</b>
+                        </h4>
+                        <%=form_for Review.new ,remote: true do |f| %>
+                            <%=f.hidden_field :app_id,value: @app.id%>
+                                <label for="star-input" class="control-label"></label>
+                                <input id="star-input" name="review[value]" , class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="<%= @review.value if @review %>">
+
+                                <div class="form-group col-md-8">
+                                    <textarea rows="3" class="form-control" name="review[text]" id="review_text"><%= @review.text if @review %></textarea>
+                                </div>
+                                <input type="submit" class="btn btn-info" value="Submit">
+                                <% end %>
+                </div>
+    </div>
+    <script>
+        $('#star-input').rating({
+            step: 1,
+            starCaptions: { 1: 'Very Poor', 2: 'Poor', 3: 'Ok', 4: 'Good', 5: 'Very Good' },
+            starCaptionClasses: { 1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success' }
+        });
+    </script>
+    <% end %>
