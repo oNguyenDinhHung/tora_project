@@ -1,284 +1,93 @@
 <style>
-	.btn-grey {
-		background-color: #D8D8D8;
-		color: #FFF;
-	}
 
-	.rating-block {
-		background-color: #FAFAFA;
-		border: 1px solid #EFEFEF;
-		padding: 15px 15px 20px 15px;
-		border-radius: 3px;
-	}
 
-	.bold {
-		font-weight: 700;
-	}
-
-	.padding-bottom-7 {
-		padding-bottom: 7px;
-	}
-
-	.review-block {
-		background-color: #FAFAFA;
-		border: 1px solid #EFEFEF;
-		padding: 15px;
-		border-radius: 3px;
-		margin-bottom: 15px;
-	}
-
-	.review-block-name {
-		font-size: 12px;
-		margin: 10px 0;
-	}
-
-	.review-block-date {
-		font-size: 12px;
-	}
-
-	.review-block-rate {
-		font-size: 13px;
-		margin-bottom: 15px;
-	}
-
-	.review-block-title {
-		font-size: 15px;
-		font-weight: 700;
-		margin-bottom: 10px;
-	}
-
-	.review-block-description {
-		font-size: 13px;
-	}
-
-	.nav-item.a {
-		color: #FFF0F5
-	}
+  .review-block {
+    background-color: #f5f5f5;
+    border: 1px solid #EFEFEF;
+    padding: 15px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+  }
+  .glyphicon { margin-right:5px;}
+  .rating .glyphicon {font-size: 22px;}
+  .rating-num { margin-top:0px;font-size: 54px; }
+  .progress { margin-bottom: 5px;}
+  .progress-bar { text-align: left; }
+  .rating-desc .col-md-3 {padding-right: 0px;}
+  .sr-only { margin-left: 5px;overflow: visible;clip: auto; }
 </style>
 <!-- Thông tin trên cùng -->
-<div class="container">
-	<div class="container">
-		<div class="media">
-			<div class="media-left col-md-2">
-				<%=image_tag @app.picture.url, width: "100%", class:"media-object" %>
-			</div>
-			<div class="media-body">
-				<h1 class="media-heading">
-					<%=@app.name%>
-				</h1>
-			</div>
+<div>
+  <div class="review-block">
+    <div class="media">
+      <div class="media-left col-md-2">
+        <%= image_tag @app.picture.url, width: "100%", class: "media-object" %>
+      </div>
+      <div class="media-body">
+        <h1 class="media-heading">
+          <%= @app.name %>
+        </h1>
+      </div>
 
-			<br>
-			<h4>
-				<%=t('views.app.by',maker: @app.maker.try(:name)||"メーカー名")%>
-			</h4>
-			<button type="button" class="btn btn-success">Review
-				<span class="badge">3</span>
-			</button>
-			<a href="#" class="btn btn-success">
-				<span class="fa fa-external-link"></span>
-				<%=link_to "ダウンロードページヘ",@app.link,target: "_blank",class: "btn btn-secondary"%>
-			</a>
-		</div>
-	</div>
+      <br>
+      <h4>
+        <%= t('views.app.by', maker: @app.maker.try(:name)||"メーカー名") %>
+      </h4>
+      <button type="button" class="btn btn-success">Review
+        <span class="badge"><%= @app.reviews.count %></span>
+      </button>
+      <a href="#" class="btn btn-success">
+        <span class="fa fa-external-link"></span>
+        <%= link_to "ダウンロードページヘ", @app.link, target: "_blank", class: "btn btn-secondary" %>
+      </a>
+    </div>
+  </div>
 </div>
 <br>
 <hr>
 
 <!-- 3 cái nút -->
 <ul class="nav nav-pills nav-justified" role="tablist">
-	<li class="nav-item active">
-		<a class="nav-link active" data-toggle="pill" href="#overview">概要</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" data-toggle="pill" href="#reviews">レビュー</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" data-toggle="pill" href="#comments">コメント</a>
-	</li>
+  <li class="nav-item active">
+    <a class="nav-link active review-block" data-toggle="pill" href="#overview">概要</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link review-block" data-toggle="pill" href="#reviews">レビュー</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link review-block" data-toggle="pill" href="#comments">コメント</a>
+  </li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
 
 
-	<div id="overview" class="container tab-pane active">
-		<%= render 'apps/app_overview'%>
-	</div>
+  <div id="overview" class=" tab-pane active">
+    <div class="col-md-11 col-md-offset-1">
+      <%= render 'apps/app_overview' %>
+    </div>
+  </div>
 
-	<!-- Phần reviews -->
-	<div id="reviews" class="container tab-pane fade">
-		<br>
+  <!-- Phần reviews -->
+  <div id="reviews" class="container tab-pane fade">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <%= render 'app_reviews_tab' %>
+    </div>
+  </div>
+  </div>
+  <!-- Phần Comments -->
 
-		<div class="container">
+  <div id="comments" class="container tab-pane fade">
+    <br>
+    <div class="col-md-10 col-md-offset-1">
+      <%= render 'app_comments' %>
+    </div>
 
-			<%= render 'reviews/form' %>
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="rating-block">
-							<h4>Average user rating</h4>
-							<h2 class="bold padding-bottom-7">4.3
-								<small>/ 5</small>
-							</h2>
-							<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							</button>
-							<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							</button>
-							<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							</button>
-							<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							</button>
-							<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-							</button>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<h4>Rating breakdown</h4>
-						<div class="pull-left">
-							<div class="pull-left" style="width:35px; line-height:1;">
-								<div style="height:9px; margin:5px 0;">5
-									<span class="glyphicon glyphicon-star"></span>
-								</div>
-							</div>
-							<div class="pull-left" style="width:180px;">
-								<div class="progress" style="height:9px; margin:8px 0;">
-									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 1000%">
-										<span class="sr-only">80% Complete (danger)</span>
-									</div>
-								</div>
-							</div>
-							<div class="pull-right" style="margin-left:10px;">1</div>
-						</div>
-						<div class="pull-left">
-							<div class="pull-left" style="width:35px; line-height:1;">
-								<div style="height:9px; margin:5px 0;">4
-									<span class="glyphicon glyphicon-star"></span>
-								</div>
-							</div>
-							<div class="pull-left" style="width:180px;">
-								<div class="progress" style="height:9px; margin:8px 0;">
-									<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" style="width: 80%">
-										<span class="sr-only">80% Complete (danger)</span>
-									</div>
-								</div>
-							</div>
-							<div class="pull-right" style="margin-left:10px;">1</div>
-						</div>
-						<div class="pull-left">
-							<div class="pull-left" style="width:35px; line-height:1;">
-								<div style="height:9px; margin:5px 0;">3
-									<span class="glyphicon glyphicon-star"></span>
-								</div>
-							</div>
-							<div class="pull-left" style="width:180px;">
-								<div class="progress" style="height:9px; margin:8px 0;">
-									<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5" style="width: 60%">
-										<span class="sr-only">80% Complete (danger)</span>
-									</div>
-								</div>
-							</div>
-							<div class="pull-right" style="margin-left:10px;">0</div>
-						</div>
-						<div class="pull-left">
-							<div class="pull-left" style="width:35px; line-height:1;">
-								<div style="height:9px; margin:5px 0;">2
-									<span class="glyphicon glyphicon-star"></span>
-								</div>
-							</div>
-							<div class="pull-left" style="width:180px;">
-								<div class="progress" style="height:9px; margin:8px 0;">
-									<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="5" style="width: 40%">
-										<span class="sr-only">80% Complete (danger)</span>
-									</div>
-								</div>
-							</div>
-							<div class="pull-right" style="margin-left:10px;">0</div>
-						</div>
-						<div class="pull-left">
-							<div class="pull-left" style="width:35px; line-height:1;">
-								<div style="height:9px; margin:5px 0;">1
-									<span class="glyphicon glyphicon-star"></span>
-								</div>
-							</div>
-							<div class="pull-left" style="width:180px;">
-								<div class="progress" style="height:9px; margin:8px 0;">
-									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5" style="width: 20%">
-										<span class="sr-only">80% Complete (danger)</span>
-									</div>
-								</div>
-							</div>
-							<div class="pull-right" style="margin-left:10px;">0</div>
-						</div>
-					</div>
-					</div>
-				</div>
+  </div>
+  <hr>
+  <!-- /container -->
 
-				<div class="row">
-					<div class="col-sm-7">
-						<hr/>
-						<div id="app_<%=@app.id%>_reviews" class="review-block">
-							<%=render @app.reviews%>
-						</div>
-					</div>
-				</div>
-
-		</div>
-		<!-- Phần Comments -->
-		<div id="comments" class="container tab-pane fade">
-			<br>
-			<div id="comment_form" class="row">
-				<% if user_signed_in? %>
-					<h4>
-						<b>コメントしてください</b>
-					</h4>
-					<%=form_for Kuchikomi.new,remote: true do |f| %>
-						<%=f.hidden_field :app_id,value: @app.id%>
-				
-							<div class="form-group " class="col-md-6 col-md-offset-3">
-									<%=f.text_field :text,class: "form-control", placeholder: "コメントしてください"%>
-										<div class="invalid-feedback" id="text_feedback"></div>
-							</div>
-							<div class="form-group">
-								<%=f.submit :class => 'btn btn-success' %>
-							</div>
-							<% end %>
-								<% end %>
-			</div>
-								<div class="row">
-									<div id="app_<%=@app.id%>_kuchikomis" >
-										<%=render @app.kuchikomis%>
-									</div>
-								</div>
-		
-								<!-- <div class="media">
-					<div class="media-left">
-						<img src="images/avatar1.png" class="media-object img-circle" style="width:60px">
-					</div>
-					<div class="media-body">
-						<span class="pull-right">06.11.1995</span>
-						<h4 class="media-heading">Left-aligned</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-				<hr>
-				<div class="media">
-					<div class="media-left">
-						<img src="images/avatar1.png" class="media-object img-circle" style="width:60px">
-					</div>
-					<div class="media-body">
-						<span class="pull-right">06.11.1995</span>
-						<h4 class="media-heading">Left-aligned</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-				</div> -->
-								<hr>
-		</div>
-		<!-- /container -->
-
-	</div>
+</div>
 

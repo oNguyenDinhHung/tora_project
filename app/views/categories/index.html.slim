@@ -1,5 +1,5 @@
 .row
-	.col-md-6.mx-auto
+    .col-md-9.col-md-offset-3
 		h2 =t('views.category.category_list')
 		=form_for Category.new,remote: true do |f|
 			table#categories.table
@@ -10,7 +10,7 @@
 						th
 				tbody
 					=render @categories
-				tfoot.tfoot-default				
+				tfoot.tfoot-default
 					tr
 						td
 							=f.text_field :name,placeholder: t("views.category.new_category"),class: 'form-control'

@@ -3,5 +3,5 @@ tr id=store.id
 		=text_field_tag 'store[name]',store.name,style: "border: 0px",readonly: true
 		.help-block
 	td
-		=submit_tag t("views.store.update_store"),form: "not_new_store",style: "display:none",class: "btn btn-warning" 
+		=submit_tag t("views.store.update_store"),form: "not_new_store",style: "display:none",class: "btn btn-warning"
 	td=link_to t('views.store.delete_store'),store,method: :delete,remote: true,data: {confirm: t("views.store.are_you_sure")},class: "btn btn-danger"

@@ -13,7 +13,20 @@ class AppsController < ApplicationController
 	end
 	def show
 		@app=App.find_by_id params[:id]
+		@total_reviews = @app.reviews.count
+		@avg_rate = (@app.reviews.average(:value) || 0).round(1)
+		if @total_reviews > 0
+		@five_rate_percent = (100*(@app.reviews.where({:value => 5}).count)/@total_reviews).round(2)
+		@four_rate_percent = (100*(@app.reviews.where({:value => 4}).count)/@total_reviews).round(2)
+		@three_rate_percent = (100*(@app.reviews.where({:value => 3}).count)/@total_reviews).round(2)
+		@two_rate_percent = (100*(@app.reviews.where({:value => 2}).count)/@total_reviews).round(2)
+		@one_rate_percent = (100*(@app.reviews.where({:value => 1}).count)/@total_reviews).round(2)
+		else
+		@five_rate_percent=@four_rate_percent=@three_rate_percent=@two_rate_percent=@one_rate_percent=0
+		end
+		if current_user
 		@review = @app.reviews.find_by({:user_id => current_user.id})
+		end
 		unless @app			
 			redirect_to root_path,alert: t(".notfound")
 		end				
@@ -45,6 +58,14 @@ class AppsController < ApplicationController
 		# @updated_params=[]
 		# @updated_params<<"update_app_picture" if app_params[:picture]
 		# @updated_params<<"update_app_description" if app_params[:description]
+	end
+	def destroy
+		App.find(params[:id]).destroy
+		flash[:success] = "削除が成功"
+		redirect_to app_list_path
+	end
+	def list
+		@apps = current_user.apps
 	end
 	private
 	def app_params

@@ -1,7 +1,7 @@
 module AppsHelper
 	def star_rating_for value		
 		if value
-			html="<span style='color: yellow;'>"
+			html="<span style='color: green;'>"
 			value=(value.round(1)*2).round/2.0
 			while value>0.5
 				value-=1.0

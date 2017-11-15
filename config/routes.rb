@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users , controllers: {
         registrations: 'users/registrations'
       }
+  get 'app/list', to: 'apps#list'
   resources :apps
 =begin
   resources :apps do

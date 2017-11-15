@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="border: #aaaaaa">
   <div class="col-6 col-md-2 sidebar-offcanvas ml-5" id="sidebar">
     <div class="list-group">
       <form class="">
@@ -12,26 +12,25 @@
   </div>
   <div class="col-md-9">
     <% @categories.each do |category|
-      @ctg_apps = Array(App.limit(6).find_by(:category => category.id))
+      @ctg_apps = Array(App.limit(6).where(:category_id => category.id))
     %>
         <% if @ctg_apps.length > 0 %> <h3><%= category.name %></h3>
 
-            <div class="row">
+            <div class="row" style="background-color: #FAFAFA">
               <% @ctg_apps.each do |app| %>
                   <div class="card-deck col-md-2">
-                    <div class="card">
+                    <div class="card" >
                       <%= image_tag app.picture.url, class: "card-img-top" %>
                       <div class="card-block">
                         <h4 class="card-title"><%= link_to app.name, app %></h4>
-                        <span></span>
-                        <!--<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
-                        <!--<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+                        <span><%=star_rating_for app.reviews.average(:value)%></span>(<%= app.reviews.count %>)
                       </div>
                     </div>
                   </div>
 
               <% end %>
             </div>
+            <div class="col-md-1 col-md-offset-11"><a href="#" class="btn btn-link" style="text-decoration: underline;">もっと見る</a></div>
         <% end %>
     <% end %>
   </div>
