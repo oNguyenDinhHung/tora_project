@@ -1,23 +1,14 @@
-<div id="photo_<%=photo.id%>" style="margin-top: 20px;margin-bottom: 20px;border: solid 5px green;border-radius: 10px;">
-	<%=image_tag photo.image,width: "100%",data: {toggle: "modal",target: "#modal_photo_#{photo.id}"}%>
+<div class="modal fade" id="modal_photo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
 
-	<div class="modal fade" id="modal_photo_<%=photo.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel"><%=t('views.photo.modal_title',id: photo.id)%></h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <%=image_tag photo.image%>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%=t('views.photo.modal_close')%></button>
-	        <%=link_to '',photo,method: :delete,data: {confirm: t("are_you_sure")},remote: true,class: "btn btn-danger fa fa-trash" if user_signed_in?&&current_user==photo.app.user%>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+      </div>
+      <div class="modal-body">
+        <%= image_tag photo.url %>
+      </div>
+
+    </div>
+  </div>
 </div>
+

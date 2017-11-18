@@ -1,0 +1,202 @@
+<%= form_for @app do |f| %>
+    <div class="row">
+      <% if @app.errors.any? %>
+      <div class="col-md-4 col-md-offset-4">
+       <div class="alert alert-warning fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <% @app.errors.full_messages.each do |message| %>
+              <div>
+                <li>
+                  <%= message %>
+                </li>
+              </div>
+          
+              <% end %>
+       </div>
+      </div>
+      <% end %>
+    </div>
+    <br><br>
+    <div class="row">
+        
+      <div class="col-md-4 col-md-offset-2">
+        
+        <div class="row form-group">
+          <div class="col-md-5">
+            <%= f.label :name, class: "hidden" %>
+          </div>
+      
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="sr-only" for="email">Application name</label>
+              <div class="input-group ">
+                <div class="input-group-addon" style="width: 2.6rem">
+                  <i class="fa fa-window-restore"></i>
+                </div>
+                <%= f.text_field :name, class: "form-control", placeholder: "アプリ名", required: true %>
+                  <div class="invalid-feedback" id="name_feedback"></div>
+              </div>
+            </div>
+          </div>
+      
+      
+        </div>
+        <span class="text-success align-middle">メーカー</span>
+        <div class="row form-group">
+          <div class="col-md-5">
+            <%= f.label :maker_id, class: "hidden" %>
+          </div>
+      
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="sr-only" for="email">Maker</label>
+              <div class="input-group ">
+                <div class="input-group-addon" style="width: 2.6rem">
+                  <i class="fa fa-users"></i>
+                </div>
+                <%= f.select :maker_id, Maker.all.map {|x| [x.name, x.id]}, {}, class: "form-control" %>
+                  <div class="invalid-feedback" id="maker_feedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="text-success align-middle">ストアー</span>
+        <div class="row form-group">
+          <div class="col-md-5">
+            <%= f.label :store_id, class: "hidden" %>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="sr-only" for="password">Store</label>
+              <div class="input-group ">
+                <div class="input-group-addon" style="width: 2.6rem">
+                  <i class="fa fa-building-o"></i>
+                </div>
+                <%= f.select :store_id, Store.all.map {|x| [x.name, x.id]}, {}, class: "form-control"%>
+                  <div class="invalid-feedback" id="store_feedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="row form-group">
+          <div class="col-md-5">
+            <%= f.label :originid, class: "hidden" %>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="sr-only" for="password">OriginID</label>
+              <div class="input-group ">
+                <div class="input-group-addon" style="width: 2.6rem">
+                  <i class="fa fa-id-badge"></i>
+                </div>
+                <%= f.text_field :originid, class: "form-control", placeholder: "オリジンID", required: true %>
+                  <div class="invalid-feedback" id="originid_feedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="row form-group">
+          <div class="col-md-5">
+            <%= f.label :link, class: "hidden" %>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="sr-only" for="password">Link</label>
+              <div class="input-group ">
+                <div class="input-group-addon" style="width: 2.6rem">
+                  <i class="fa fa-external-link"></i>
+                </div>
+                <%= f.text_field :link, class: "form-control", placeholder: "リンク", required: true %>
+                  <div class="invalid-feedback" id="link_feedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="text-success align-middle">カテゴリ</span>
+        <div class="row form-group">
+          <div class="col-md-5">
+            <%= f.label :category_id, class: "hidden" %>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="sr-only" for="password">OriginID</label>
+              <div class="input-group ">
+                <div class="input-group-addon" style="width: 2.6rem">
+                  <i class="fa fa-list"></i>
+                </div>
+                <%= f.select :category_id, Category.all.map {|x| [x.name, x.id]}, {}, {class: "form-control"}%>
+                  <div class="invalid-feedback" id="category_feedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="text-success align-middle">タイプ</span>
+        <div class="row form-group">
+          <div class="col-md-5">
+            <%= f.label :apptype_id, class: "hidden" %>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="sr-only" for="password">OriginID</label>
+              <div class="input-group ">
+                <div class="input-group-addon" style="width: 2.6rem">
+                  <i class="fa fa-sitemap"></i>
+                </div>
+                <%= f.select :apptype_id, Apptype.all.map {|x| [x.name, x.id]}, {}, class: "form-control"%>
+                  <div class="invalid-feedback" id="apptype_feedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <span class="text-success align-middle">ロゴ</span>
+        <div class="row form-group">
+          <div class="col-md-5">
+            <%= f.label :picture, class: "hidden" %>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="sr-only" for="password">OriginID</label>
+              <div class="input-group ">
+                <label for="app_picture">
+                  <%= image_tag @app.picture, width: "100%" %>
+                </label>
+                <%= f.file_field :picture, style: "display:none"%>
+                  <div class="invalid-feedback" id="apptype_feedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="text-success align-middle">写真</span>
+        <div class="row form-group">
+          <div class="col-md-5">
+            <%= f.label :photos, class: "hidden", required: true %>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="sr-only" for="password">OriginID</label>
+              <div class="input-group ">
+                <label for="app_picture">
+                </label>
+                <%= f.file_field :photos, multiple: true%>
+                  <div class="invalid-feedback" id="apptype_feedback"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label for="description" class="text-success align-middle">説明：</label>
+          <%= f.text_area :description, required: true, class: "form-control", size: "8x5"%>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+          <%= f.submit :class => 'btn btn-success btn-block' %>
+      </div>
+    </div>
+  
+<% end %>

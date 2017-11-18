@@ -1,5 +1,7 @@
 class App < ApplicationRecord
 	mount_uploader :picture, PictureUploader
+  mount_uploaders :photos, PhotoUploader
+  serialize :photos, JSON
   belongs_to :maker
   belongs_to :store
   belongs_to :user
@@ -14,6 +16,11 @@ class App < ApplicationRecord
   validates :link,presence: true
 
   def rating
-  	reviews.average(:value)
+  	avg = reviews.average(:value)
+    if avg
+      return avg
+    else
+      return 0
+    end
   end
 end

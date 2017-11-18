@@ -1,24 +1,37 @@
-<div class="row">
-	<div class="col-6 col-md-2 sidebar-offcanvas ml-5" id="sidebar">
-		<div class="list-group">
-			<form class="">
-			<input class="form-control" type="text" placeholder="サーチ。。。" aria-label="Search">
-			</form>
-			<a href="#" class="list-group-item active">拡張機能</a>
-			<a href="#" class="list-group-item">テーマ</a>
-			<a href="#" class="list-group-item">アプリ</a>
-			<a href="#" class="list-group-item">ゲーム</a>
-		</div>
+<div class="row" style="border: #aaaaaa">
+  <div class="col-6 col-md-2 sidebar-offcanvas ml-5" id="sidebar">
+    <div class="list-group">
+      <form class="">
+        <input class="form-control" type="text" placeholder="サーチ。。。" aria-label="Search">
+      </form>
+      <a href="#" class="list-group-item active">拡張機能</a>
+      <a href="#" class="list-group-item">テーマ</a>
+      <a href="#" class="list-group-item">アプリ</a>
+      <a href="#" class="list-group-item">ゲーム</a>
     </div>
-	<div class="col-md-9">
-		<div class="row">
-			<% @apps.each do |app| %>
-				<div class="col-md-3">
-					<%= image_tag app.picture,width: "100%"%> <br>
-					<%=link_to app.name,app%> <br>					
-					<%= star_rating_for app.rating_value %>(<%=app.review_number%>)
-				</div>
-			<% end %>
-		</div>		
-	</div>
+  </div>
+  <div class="col-md-9">
+    <% @categories.each do |category|
+      @ctg_apps = Array(App.limit(6).where(:category_id => category.id))
+    %>
+        <% if @ctg_apps.length > 0 %> <h3><%= category.name %></h3>
+
+            <div class="row" style="background-color: #FAFAFA">
+              <% @ctg_apps.each do |app| %>
+                  <div class="card-deck col-md-2">
+                    <div class="card" >
+                      <%= image_tag app.picture.url, class: "card-img-top" %>
+                      <div class="card-block">
+                        <h4 class="card-title"><%= link_to app.name, app %></h4>
+                        <span><%=star_rating_for app.reviews.average(:value)%></span>(<%= app.reviews.count %>)
+                      </div>
+                    </div>
+                  </div>
+
+              <% end %>
+            </div>
+            <div class="col-md-1 col-md-offset-11"><a href="#" class="btn btn-link" style="text-decoration: underline;">もっと見る</a></div>
+        <% end %>
+    <% end %>
+  </div>
 </div>

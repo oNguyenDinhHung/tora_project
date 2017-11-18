@@ -19,3 +19,7 @@
 /yarn-error.log
 
 .byebug_history
+node_modules,
+bower_components,
+vendor/assets/components,
+

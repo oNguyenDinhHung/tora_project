@@ -1,115 +1,93 @@
-<div class="row">
-	<div class="col-md-2 ml-auto">
-		<% if user_signed_in?&&current_user==@app.user %>		
-			<%= form_for @app,html: {id: 'update_app_picture'},remote: true do |f| %>					  
-			  <label for="app_picture"><%=image_tag @app.picture,width: "100%"%></label>
-	      <%= f.file_field :picture,style: "display:none"%>
-	      <%= f.submit nil,style: "display:none",form: 'update_app_picture', :class => 'btn btn-success' %>
-			<% end %>
-		<% else %>
-			<%=image_tag @app.picture,width: "100%"%>
-		<% end %>
-	</div>
-	<div class="col-md-6">
-		<h1><%=@app.name%></h1>
-		<h3><%=t('views.app.by',maker: @app.maker.try(:name)||"メーカー名")%></h3>
-		<%=star_rating_for @app.rating %>(<%=@app.reviews.count%>)
-	</div>
-	<div class="col-md-2 mr-auto">
-		<%=link_to "ダウンロードページヘ",@app.link,target: "_blank",class: "btn btn-secondary"%>
-	</div>
+<style>
+
+
+  .review-block {
+    background-color: #f5f5f5;
+    border: 1px solid #EFEFEF;
+    padding: 15px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+  }
+  .glyphicon { margin-right:5px;}
+  .rating .glyphicon {font-size: 22px;}
+  .rating-num { margin-top:0px;font-size: 54px; }
+  .progress { margin-bottom: 5px;}
+  .progress-bar { text-align: left; }
+  .rating-desc .col-md-3 {padding-right: 0px;}
+  .sr-only { margin-left: 5px;overflow: visible;clip: auto; }
+</style>
+<!-- Thông tin trên cùng -->
+<div>
+  <div class="review-block">
+    <div class="media">
+      <div class="media-left col-md-2">
+        <%= image_tag @app.picture.url, width: "100%", class: "media-object" %>
+      </div>
+      <div class="media-body">
+        <h1 class="media-heading">
+          <%= @app.name %>
+        </h1>
+      </div>
+
+      <br>
+      <h4>
+        <%= t('views.app.by', maker: @app.maker.try(:name)||"メーカー名") %>
+      </h4>
+      <button type="button" class="btn btn-success">Review
+        <span class="badge"><%= @app.reviews.count %></span>
+      </button>
+      <a href="#" class="btn btn-success">
+        <span class="fa fa-external-link"></span>
+        <%= link_to "ダウンロードページヘ", @app.link, target: "_blank", class: "btn btn-secondary" %>
+      </a>
+    </div>
+  </div>
+</div>
+<br>
+<hr>
+
+<!-- 3 cái nút -->
+<ul class="nav nav-pills nav-justified" role="tablist">
+  <li class="nav-item active">
+    <a class="nav-link active review-block" data-toggle="pill" href="#overview">概要</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link review-block" data-toggle="pill" href="#reviews">レビュー</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link review-block" data-toggle="pill" href="#comments">コメント</a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+
+
+  <div id="overview" class=" tab-pane active">
+    <div class="col-md-11 col-md-offset-1">
+      <%= render 'apps/app_overview' %>
+    </div>
+  </div>
+
+  <!-- Phần reviews -->
+  <div id="reviews" class="container tab-pane fade">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <%= render 'app_reviews_tab' %>
+    </div>
+  </div>
+  </div>
+  <!-- Phần Comments -->
+
+  <div id="comments" class="container tab-pane fade">
+    <br>
+    <div class="col-md-10 col-md-offset-1">
+      <%= render 'app_comments' %>
+    </div>
+
+  </div>
+  <hr>
+  <!-- /container -->
+
 </div>
 
-<div class="row">
-	<div class="col-md-6 mx-auto">
-		<button id="gaiyou_btn" class="btn btn-primary disabled">概要</button>
-		<button id="review_btn" class="btn btn-primary">レビュー</button>
-		<button id="kuchikomi_btn" class="btn btn-primary">コメント</button>
-	</div>
-</div>
-
-<div class="row" id="gaiyou">
-	<div class="col-md-6 ml-auto">		
-		<div id="app_<%=@app.id%>_photos">
-			<%=render @app.photos%>
-		</div>
-		<img id="tmp_photo">
-		<% if user_signed_in?&&current_user==@app.user %>
-			<div class="col-md-3 mx-auto">
-				<%=form_for Photo.new,html: {id: 'new_photo'},remote: true do |f|%>					
-					<label for="photo_image"><%=image_tag "plus.png",width: "50%"%></label>
-			    <%= f.file_field :image,style: "display:none"%> <br>
-					<%= f.submit nil,style: "display:none", :class => 'btn btn-success' %>
-				<% end %>
-			</div>
-
-		<% end %>
-	</div>
-	<div class="col-md-4 mr-auto">
-		<h4>アプリの情報</h4>
-		<% if user_signed_in?&&current_user==@app.user %>		
-			<%= form_for @app,html: {id: 'update_app_description'},remote: true do |f| %>			  
-	      <%= f.text_area :description,rows: "10",readonly: true,class: "form-control"%>
-	      <%= f.submit nil,style: "display:none",form: 'update_app_description' %>
-			<% end %>
-		<% else %>
-			<%=text_area_tag nil,@app.description,rows: "10",class: "form-control",readonly: true%>
-		<% end %>
-	</div>
-</div>
-
-<div class="row" id="review" style="display: none;">
-	<div class="col-md-6 ml-auto">
-		<h4><b>ユーザレビュー</b></h4>
-		<div id="app_<%=@app.id%>_reviews">
-			<%=render @app.reviews%>
-		</div>
-	</div>
-	<div class="col-md-4 mr-auto">
-		<% if user_signed_in? %>
-			<h4><b>このアプリケーションを評価</b></h4>
-			<%=form_for Review.new,remote: true do |f| %>
-				<%=f.hidden_field :app_id,value: @app.id%>
-				<div class="form-group">
-					<%=f.label :value%>
-					<%=f.number_field :value,min: 1,max: 5,class: "form-control" %>				
-					<div class="invalid-feedback" id="value_feedback"></div>
-				</div>
-				<div class="form-group">
-					<%=f.label :text%>
-					<%=f.text_area :text,rows: "10",class: "form-control"%>				
-					<div class="invalid-feedback" id="text_feedback"></div>
-				</div>
-				<div class="form-group">
-					<%=f.submit :class => 'btn btn-success' %>
-				</div>
-			<% end %>
-		<% end %>
-	</div>
-</div>
-
-<div class="row" id="kuchikomi" style="display: none;">
-	<div class="col-md-6 ml-auto">
-		<h4><b>ユーザコメント</b></h4>
-		<div id="app_<%=@app.id%>_kuchikomis">
-			<%=render @app.kuchikomis%>
-		</div>
-	</div>
-	<div class="col-md-4 mr-auto">		
-		<% if user_signed_in? %>
-			<h4><b>コメントしてください</b></h4>
-			<%=form_for Kuchikomi.new,remote: true do |f| %>
-				<%=f.hidden_field :app_id,value: @app.id%>
-				
-				<div class="form-group">
-					<%=f.label :text%>
-					<%=f.text_area :text,rows: "10",class: "form-control"%>				
-					<div class="invalid-feedback" id="text_feedback"></div>
-				</div>
-				<div class="form-group">
-					<%=f.submit :class => 'btn btn-success' %>
-				</div>
-			<% end %>
-		<% end %>
-	</div>
-</div>
