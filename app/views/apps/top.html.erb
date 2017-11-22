@@ -1,0 +1,40 @@
+<div class="row" style="border: #aaaaaa">  
+  <div class="col-md-9" id="apps">
+    <% if @high_rate_apps.length > 0 %> <h3>TOP RATING</h3>
+
+            <div class="row" style="background-color: #FAFAFA">
+              <% @high_rate_apps.each do |app| %>
+                  <div class="card-deck col-md-2">
+                    <div class="card" >
+                      <%= image_tag app.picture.url, class: "card-img-top" %>
+                      <div class="card-block">
+                        <h4 class="card-title"><%= link_to app.name, app %></h4>
+                        <span><%=star_rating_for app.reviews.average(:value)%></span>(<%= app.reviews.count %>)
+                      </div>
+                    </div>
+                  </div>
+
+              <% end %>
+            </div>
+            <div class="col-md-1 col-md-offset-11"><a href="#" class="btn btn-link" style="text-decoration: underline;">もっと見る</a></div>
+    <% end %>
+    <% if @high_comment_apps.length > 0 %> <h3>TOP COMMENT</h3>
+
+            <div class="row" style="background-color: #FAFAFA">
+              <% @high_comment_apps.each do |app| %>
+                  <div class="card-deck col-md-2">
+                    <div class="card" >
+                      <%= image_tag app.picture.url, class: "card-img-top" %>
+                      <div class="card-block">
+                        <h4 class="card-title"><%= link_to app.name, app %></h4>
+                        <span><%=star_rating_for app.reviews.average(:value)%></span>(<%= app.reviews.count %>)
+                      </div>
+                    </div>
+                  </div>
+
+              <% end %>
+            </div>
+            <div class="col-md-1 col-md-offset-11"><a href="#" class="btn btn-link" style="text-decoration: underline;">もっと見る</a></div>
+    <% end %>    
+  </div>
+</div>

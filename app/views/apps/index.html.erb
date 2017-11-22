@@ -5,7 +5,8 @@
       <%=text_field_tag :value,nil,placeholder: "サーチ。。。",class: 'form-control'%>     
       <%=link_to 'アプリ',apps_path(type: 'name'),id: 'name',remote: true,class: 'list-group-item'%>
       <%=link_to 'カテゴリー',apps_path(type: 'category'),id: 'category',remote: true,class: 'list-group-item'%>
-      <%=link_to 'メーカー',apps_path(type: 'maker'),id: 'maker',remote: true,class: 'list-group-item'%>      
+      <%=link_to 'メーカー',apps_path(type: 'maker'),id: 'maker',remote: true,class: 'list-group-item'%>
+      <button class='btn btn-info' id="top">RANKING</button>      
     </div>
   </div>
   <div class="col-md-9" id="apps">

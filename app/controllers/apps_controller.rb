@@ -11,8 +11,7 @@ class AppsController < ApplicationController
 			@type=session[:type]||='name'
 		end
 
-		if params[:value]
-			puts @type
+		if params[:value]			
 			case @type
 				when 'name'				
 					@apps = App.where("name like '%#{params[:value]}%'")
@@ -30,6 +29,18 @@ class AppsController < ApplicationController
 		end
 
 		@categories = Category.all				
+	end
+	def top
+		@high_rate_apps=App.left_outer_joins(:reviews)
+			.group("apps.id")
+			.select("apps.*","avg(reviews.value) as rating_value")
+			.order("rating_value desc",)
+			.limit(6)
+		@high_comment_apps=App.left_outer_joins(:kuchikomis)
+			.group("apps.id")
+			.select("apps.*","count(kuchikomis.id) as kuchikomi_number")
+			.order("kuchikomi_number desc")
+			.limit(6)
 	end
 	def new
 		@app=App.new		

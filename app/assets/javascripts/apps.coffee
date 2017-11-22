@@ -35,4 +35,12 @@ $(document).on "turbolinks:load",()->
 				$('#apps').replaceWith($(data).find('#apps').clone())
 			dataType: 'html'
 			failure: ()->
-				console.log('get apps failed')	
+				console.log('get apps failed')
+	$("#sidebar #top").click ()->		
+		$.get
+			url: '/tops'
+			success: (data)->
+				$('#apps').replaceWith($(data).find('#apps').clone())
+			dataType: 'html'
+			failure: ()->
+				console.log('get tops failed')	

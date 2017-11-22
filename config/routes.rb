@@ -3,6 +3,7 @@ Rails.application.routes.draw do
         registrations: 'users/registrations'
       }
   get 'app/list', to: 'apps#list'
+  get 'tops', to: 'apps#top'
   resources :apps
 =begin
   resources :apps do
