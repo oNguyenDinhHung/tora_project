@@ -27,3 +27,12 @@ $(document).on "turbolinks:load",()->
 		$(this).attr("readonly", false)
 	$("#app_description").change ->		
 		$(this).closest('form').find('input[type="submit"]').attr("style",'display:inline-block')
+	$('#sidebar a#'+$('#type').text()).addClass('active')
+	$("#sidebar input#value").on "keyup", ()->
+		$.get
+			url: '/apps?value='+$(this).val()
+			success: (data)->
+				$('#apps').replaceWith($(data).find('#apps').clone())
+			dataType: 'html'
+			failure: ()->
+				console.log('get apps failed')	

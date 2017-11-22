@@ -5,8 +5,31 @@ class AppsController < ApplicationController
 		# .group("apps.id")
 		# .select("apps.*","count(reviews.id) as review_number","avg(reviews.value) as rating_value")
 		# .order("rating_value desc","review_number desc")
-		@apps = App.all
-		@categories = Category.all
+		if params[:type]
+			@type=session[:type]= params[:type]
+		else
+			@type=session[:type]||='name'
+		end
+
+		if params[:value]
+			puts @type
+			case @type
+				when 'name'				
+					@apps = App.where("name like '%#{params[:value]}%'")
+				when 'category'
+					categorys=Category.where("name like '%#{params[:value]}%'").pluck(:id)
+					@apps = App.where("category_id in (?)",categorys)
+				when 'maker'
+					makers=Maker.where("name like '%#{params[:value]}%'").pluck(:id)
+					@apps = App.where("maker_id in (?)",makers)
+				else
+					@apps = App.all
+			end		 
+		else			
+			@apps = App.all
+		end
+
+		@categories = Category.all				
 	end
 	def new
 		@app=App.new		
