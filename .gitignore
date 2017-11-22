@@ -17,7 +17,9 @@
 
 /node_modules
 /yarn-error.log
-
+/public/uploads
+/public/app_data
+/public/user_avatar
 .byebug_history
 node_modules,
 bower_components,
