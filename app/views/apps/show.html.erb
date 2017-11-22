@@ -36,8 +36,8 @@
       <button type="button" class="btn btn-success">Review
         <span class="badge"><%= @app.reviews.count %></span>
       </button>
-      <a href="#" class="btn btn-success">
-        <span class="fa fa-external-link"></span>
+      <a href="#">
+        <span><%=link_to '',edit_app_path(@app),class: 'btn btn-success fa fa-external-link'%></span>        
         <%= link_to "ダウンロードページヘ", @app.link, target: "_blank", class: "btn btn-secondary" %>
       </a>
     </div>
