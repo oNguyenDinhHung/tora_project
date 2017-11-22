@@ -1,0 +1,9 @@
+<div class="card-deck">
+                    <div class="card" >
+                      <%= image_tag app.picture.url, class: "card-img-top" %>
+                      <div class="card-block">
+                        <h4 class="card-title"><%= link_to app.name, app %></h4>
+                        <span><%=star_rating_for app.reviews.average(:value)%></span>(<%= app.reviews.count %>)
+                      </div>
+                    </div>
+                  </div>

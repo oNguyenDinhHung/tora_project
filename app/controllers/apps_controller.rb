@@ -47,6 +47,10 @@ class AppsController < ApplicationController
 	end
 	def show
 		@app=App.find_by_id params[:id]
+		unless @app			
+			redirect_to root_path,alert: t(".notfound")
+		end
+		@kanren_apps=App.where('category_id = ? and id != ?',@app.category_id,@app.id) if @app
 		@total_reviews = @app.reviews.count
 		@avg_rate = (@app.reviews.average(:value) || 0).round(1)
 		if @total_reviews > 0
@@ -60,10 +64,7 @@ class AppsController < ApplicationController
 		end
 		if current_user
 		@review = @app.reviews.find_by({:user_id => current_user.id})
-		end
-		unless @app			
-			redirect_to root_path,alert: t(".notfound")
-		end				
+		end						
 	end
 	def create
 		# respond_to :js

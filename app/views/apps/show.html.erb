@@ -16,78 +16,85 @@
   .rating-desc .col-md-3 {padding-right: 0px;}
   .sr-only { margin-left: 5px;overflow: visible;clip: auto; }
 </style>
-<!-- Thông tin trên cùng -->
-<div>
-  <div class="review-block">
-    <div class="media">
-      <div class="media-left col-md-2">
-        <%= image_tag @app.picture.url, width: "100%", class: "media-object" %>
+<div class="row">
+  <div class="col-md-10">
+    <!-- Thông tin trên cùng -->
+    <div>
+      <div class="review-block">
+        <div class="media">
+          <div class="media-left col-md-2">
+            <%= image_tag @app.picture.url, width: "100%", class: "media-object" %>
+          </div>
+          <div class="media-body">
+            <h1 class="media-heading">
+              <%= @app.name %>
+            </h1>
+          </div>
+
+          <br>
+          <h4>
+            <%= t('views.app.by', maker: @app.maker.try(:name)||"メーカー名") %>
+          </h4>
+          <button type="button" class="btn btn-success">Review
+            <span class="badge"><%= @app.reviews.count %></span>
+          </button>
+          <a href="#">
+            <span><%=link_to '',edit_app_path(@app),class: 'btn btn-success fa fa-external-link'%></span>        
+            <%= link_to "ダウンロードページヘ", @app.link, target: "_blank", class: "btn btn-secondary" %>
+          </a>
+        </div>
       </div>
-      <div class="media-body">
-        <h1 class="media-heading">
-          <%= @app.name %>
-        </h1>
-      </div>
-
-      <br>
-      <h4>
-        <%= t('views.app.by', maker: @app.maker.try(:name)||"メーカー名") %>
-      </h4>
-      <button type="button" class="btn btn-success">Review
-        <span class="badge"><%= @app.reviews.count %></span>
-      </button>
-      <a href="#">
-        <span><%=link_to '',edit_app_path(@app),class: 'btn btn-success fa fa-external-link'%></span>        
-        <%= link_to "ダウンロードページヘ", @app.link, target: "_blank", class: "btn btn-secondary" %>
-      </a>
     </div>
-  </div>
-</div>
-<br>
-<hr>
-
-<!-- 3 cái nút -->
-<ul class="nav nav-pills nav-justified" role="tablist">
-  <li class="nav-item active">
-    <a class="nav-link active review-block" data-toggle="pill" href="#overview">概要</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link review-block" data-toggle="pill" href="#reviews">レビュー</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link review-block" data-toggle="pill" href="#comments">コメント(<%=@app.kuchikomis.size%>)</a>
-  </li>
-</ul>
-
-<!-- Tab panes -->
-<div class="tab-content">
-
-
-  <div id="overview" class=" tab-pane active">
-    <div class="col-md-11 col-md-offset-1">
-      <%= render 'apps/app_overview' %>
-    </div>
-  </div>
-
-  <!-- Phần reviews -->
-  <div id="reviews" class="container tab-pane fade">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <%= render 'app_reviews_tab' %>
-    </div>
-  </div>
-  </div>
-  <!-- Phần Comments -->
-
-  <div id="comments" class="container tab-pane fade">
     <br>
-    <div class="col-md-10 col-md-offset-1">
-      <%= render 'app_comments' %>
+    <hr>
+
+    <!-- 3 cái nút -->
+    <ul class="nav nav-pills nav-justified" role="tablist">
+      <li class="nav-item active">
+        <a class="nav-link active review-block" data-toggle="pill" href="#overview">概要</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link review-block" data-toggle="pill" href="#reviews">レビュー</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link review-block" data-toggle="pill" href="#comments">コメント(<%=@app.kuchikomis.size%>)</a>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+
+      <div id="overview" class=" tab-pane active">
+        <div class="col-md-10 col-md-offset-1">
+          <%= render 'apps/app_overview' %>
+        </div>
+      </div>
+
+      <!-- Phần reviews -->
+      <div id="reviews" class="container tab-pane fade">
+        <div class="row">
+          <div class="col-md-10">
+            <%= render 'app_reviews_tab' %>
+          </div>
+        </div>
+      </div>
+      <!-- Phần Comments -->
+
+      <div id="comments" class="container tab-pane fade">
+        <br>
+        <div class="col-md-10">
+          <%= render 'app_comments' %>
+        </div>
+
+      </div>
+      <hr>
+      <!-- /container -->
+
     </div>
-
   </div>
-  <hr>
-  <!-- /container -->
-
+  <div class="col-md-2" style="background-color: #FAFAFA">
+    <h2>関連アプリ</h2>
+    <%=render @kanren_apps%>
+  </div>
 </div>
-

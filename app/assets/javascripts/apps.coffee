@@ -27,7 +27,8 @@ $(document).on "turbolinks:load",()->
 		$(this).attr("readonly", false)
 	$("#app_description").change ->		
 		$(this).closest('form').find('input[type="submit"]').attr("style",'display:inline-block')
-	$('#sidebar a#'+$('#type').text()).addClass('active')
+	if($('#type').text().length>0)
+		$('#sidebar a#'+$('#type').text()).addClass('active')
 	$("#sidebar input#value").on "keyup", ()->
 		$.get
 			url: '/apps?value='+$(this).val()
