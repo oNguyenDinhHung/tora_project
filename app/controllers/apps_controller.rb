@@ -50,7 +50,7 @@ class AppsController < ApplicationController
 		unless @app			
 			redirect_to root_path,alert: t(".notfound")
 		end
-		@kanren_apps=App.where('category_id = ? and id != ?',@app.category_id,@app.id) if @app
+		@kanren_apps=App.where('category_id = ? and id != ?',@app.category_id,@app.id).limit(6) if @app
 		@total_reviews = @app.reviews.count
 		@avg_rate = (@app.reviews.average(:value) || 0).round(1)
 		if @total_reviews > 0

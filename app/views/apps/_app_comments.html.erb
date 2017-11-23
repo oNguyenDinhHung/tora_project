@@ -18,6 +18,6 @@
 </div>
 <div class="row well">
   <div id="app_<%= @app.id %>_kuchikomis">
-    <%= render @app.kuchikomis %>
+    <%= render @app.kuchikomis.order(created_at: :desc) %>
   </div>
 </div>
