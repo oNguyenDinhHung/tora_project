@@ -1,5 +1,5 @@
 class AppsController < ApplicationController
-	before_action :authenticate_user!,except: [:index,:show]
+	before_action :authenticate_user!,except: [:index,:show,:top]
 	def index
 		# @apps=App.left_outer_joins(:reviews)
 		# .group("apps.id")

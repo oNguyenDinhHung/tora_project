@@ -1,6 +1,6 @@
 <div class="row" style="border: #aaaaaa">  
   <div class="col-md-9" id="apps">
-    <% if @high_rate_apps.length > 0 %> <h3>TOP RATING</h3>
+    <% if @high_rate_apps.length > 0 %> <h3>評価</h3>
 
             <div class="row" style="background-color: #FAFAFA">
               <% @high_rate_apps.each do |app| %>
@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-1 col-md-offset-11"><a href="#" class="btn btn-link" style="text-decoration: underline;">もっと見る</a></div>
     <% end %>
-    <% if @high_comment_apps.length > 0 %> <h3>TOP COMMENT</h3>
+    <% if @high_comment_apps.length > 0 %> <h3>口コミ</h3>
 
             <div class="row" style="background-color: #FAFAFA">
               <% @high_comment_apps.each do |app| %>
