@@ -34,6 +34,13 @@ $(document).on "turbolinks:load",()->
 			url: '/apps?value='+$(this).val()
 			success: (data)->
 				$('#apps').replaceWith($(data).find('#apps').clone())
+				$("a.readmore").click ()->		
+					$(this).closest('div.eachCategory').find('#sukoshi').toggle()
+					$(this).closest('div.eachCategory').find('#zenbu').toggle()
+					if($(this).text()=='もっと見る')
+						$(this).text('隠す')
+					else
+						$(this).text('もっと見る')
 			dataType: 'html'
 			failure: ()->
 				console.log('get apps failed')
@@ -44,4 +51,11 @@ $(document).on "turbolinks:load",()->
 				$('#apps').replaceWith($(data).find('#apps').clone())
 			dataType: 'html'
 			failure: ()->
-				console.log('get tops failed')	
+				console.log('get tops failed')
+	$("a.readmore").click ()->		
+		$(this).closest('div.eachCategory').find('#sukoshi').toggle()
+		$(this).closest('div.eachCategory').find('#zenbu').toggle()
+		if($(this).text()=='もっと見る')
+			$(this).text('隠す')
+		else
+			$(this).text('もっと見る')
